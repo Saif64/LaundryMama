@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/pages/homepage.dart';
+import 'package:laundry_mama/pages/login_page.dart';
 import 'package:laundry_mama/pages/signup_page.dart';
 
 void main() {
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
       initialRoute: HOMEPAGE,
       routes: {
         HOMEPAGE: (context) => HomePage(),
-        SIGNUP_PAGE: (context) => SignupPage(),
+        SIGNUP_PAGE: (context) => SignupPage(
+              onTap: () =>
+                  Navigator.of(context).pushReplacementNamed(LOGIN_PAGE),
+            ),
+        LOGIN_PAGE: (context) => LoginPage()
       },
     );
   }
