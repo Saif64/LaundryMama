@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:laundry_mama/widgets/auth_icons.dart';
 import 'package:laundry_mama/widgets/auth_page_input.dart';
 import 'package:laundry_mama/widgets/head2.dart';
@@ -20,7 +21,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
   // text editing controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmedPasswordController = TextEditingController();
+  final _phoneNumber = TextEditingController();
 
   bool isAuthenticating = false;
 
@@ -40,7 +41,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
     _registerAnimationController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmedPasswordController.dispose();
+    _phoneNumber.dispose();
     super.dispose();
   }
 
@@ -50,6 +51,40 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
       isAuthenticating = true;
     });
   }
+
+  String? validateEmail(String? value) {
+    const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
+        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
+        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
+        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
+        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
+        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
+        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
+    final regex = RegExp(pattern);
+
+    return value!.isNotEmpty && !regex.hasMatch(value)
+        ? 'Enter a valid email address'
+        : null;
+  }
+
+  String? validatePassword(String? value) {
+    RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+    if (value!.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter valid password';
+      } else {
+        return null;
+      }
+    }
+  }
+
+  final onClickLogin = const SpinKitFadingCube(
+    color: Colors.green,
+  );
 
   // Build Methods & Widgets
   @override
@@ -72,17 +107,23 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 controller: _registerAnimationController,
               ),
               Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 36,
-                  ),
-                  child: const Head2(
-                          text: "Welcome to the new era of Laundry",
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold)
-                      .animate()
-                      .fadeIn(duration: const Duration(milliseconds: 1200))
-                      .moveY(duration: const Duration(milliseconds: 565))
-                      .shimmer(delay: const Duration(milliseconds: 370))),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 36,
+                ),
+                child: const Head2(
+                        text: "Welcome to the new era of Laundry",
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900)
+                    .animate()
+                    .fadeIn(duration: const Duration(milliseconds: 1200))
+                    .moveY(duration: const Duration(milliseconds: 565))
+                    .shakeX(
+                        duration: const Duration(milliseconds: 479),
+                        delay: const Duration(milliseconds: 250))
+                    .shimmer(
+                      delay: const Duration(milliseconds: 370),
+                    ),
+              ),
               const SizedBox(height: 35),
 
               // username textfield
@@ -92,10 +133,24 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 obscureText: false,
                 inputType: TextInputType.emailAddress,
                 labelText: 'Email or Username',
-              ),
+                validator: validateEmail,
+              ).animate().shimmer(
+                    duration: const Duration(milliseconds: 875),
+                  ),
 
               const SizedBox(height: 10),
+              // Phone Number textfield
+              AuthInput(
+                controller: _phoneNumber,
+                hintText: 'Phone Number',
+                obscureText: true,
+                inputType: TextInputType.phone,
+                labelText: 'Phone Number',
+              ).animate().shimmer(
+                    duration: const Duration(milliseconds: 875),
+                  ),
 
+              const SizedBox(height: 10),
               // password textfield
               AuthInput(
                 controller: _passwordController,
@@ -103,28 +158,22 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 obscureText: true,
                 inputType: TextInputType.text,
                 labelText: 'Password',
-              ),
+                validator: validatePassword,
+              ).animate().shimmer(
+                    duration: const Duration(milliseconds: 875),
+                  ),
 
               const SizedBox(height: 10),
 
-              // confirm password textfield
-              AuthInput(
-                controller: _confirmedPasswordController,
-                hintText: 'Confirm Password',
-                obscureText: true,
-                inputType: TextInputType.text,
-                labelText: 'Confirm Password',
-              ),
-
               const SizedBox(height: 30),
               // sign in button
-              if (isAuthenticating) const CircularProgressIndicator(),
+              if (isAuthenticating) onClickLogin,
               if (!isAuthenticating)
                 LongButton(
                   onTap: registerUser,
                   text: 'Create an account',
                 ),
-
+              const SizedBox(height: 15),
               // or continue with
               Padding(
                 padding:
@@ -154,7 +203,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 15),
               // google + apple sign in buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +212,10 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                   AuthIconButton(
                     imagePath: 'assets/icons/google.png',
                     onTap: () {},
-                  ),
+                  ).animate().shimmer(
+                        delay: const Duration(milliseconds: 1200),
+                        duration: const Duration(milliseconds: 875),
+                      ),
 
                   const SizedBox(width: 25),
 
@@ -171,7 +223,10 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                   AuthIconButton(
                     imagePath: 'assets/icons/apple.png',
                     onTap: () {},
-                  )
+                  ).animate().shimmer(
+                        delay: const Duration(milliseconds: 1200),
+                        duration: const Duration(milliseconds: 875),
+                      ),
                 ],
               ),
 

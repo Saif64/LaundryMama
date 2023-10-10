@@ -6,6 +6,7 @@ class AuthInput extends StatelessWidget {
   final bool obscureText;
   final TextInputType inputType;
   final String labelText;
+  final String? Function(String?)? validator;
 
   const AuthInput({
     super.key,
@@ -14,6 +15,7 @@ class AuthInput extends StatelessWidget {
     required this.obscureText,
     required this.inputType,
     required this.labelText,
+    this.validator,
   });
 
   @override
@@ -21,6 +23,7 @@ class AuthInput extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
+        validator: validator,
         controller: controller,
         obscureText: obscureText,
         keyboardType: inputType,

@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.1
   dio: ^5.3.3
   lottie: ^2.6.0
+  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
   flutter_test:
