@@ -15,7 +15,7 @@ app.use(cookieParser());
 // built-in middleware for json 
 app.use(express.json());
 // built-in middleware to handle urlencoded form data
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); //why false?
 
 // Cross Origin Resource Sharing
 app.use(

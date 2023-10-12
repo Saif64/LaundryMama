@@ -12,7 +12,8 @@ datasource db {
 
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  // id should be int type?
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId //Required if the underlying BSON type is OBJECT_ID (ID fields, relation scalars)
   username  String    @unique
   email     String    @unique
   password  String
