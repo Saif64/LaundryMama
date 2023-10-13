@@ -3,6 +3,8 @@ const express=require("express")
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const logger=require("./middlewares/logger")
+const expressPino=require("express-pino-logger")
 
 
 
@@ -25,9 +27,14 @@ app.use(
   })
 );
 
+//logger as a middleware
+//logger as middleware
+app.use(expressPino({logger}))
+
 
 //routes
 app.use("/",(req,res)=>{
+    logger.info("first route")
     return res.send("The first route o LaundryMama")
 
 })
@@ -37,6 +44,6 @@ app.use("/",(req,res)=>{
 
 //start the express server
 const PORT = process.env.PORT || 3501;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
 
 
