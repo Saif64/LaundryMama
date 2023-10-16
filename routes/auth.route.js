@@ -1,48 +1,18 @@
-const jwt = require("jsonwebtoken");
-const prisma = require("../prisma/client");
-const bcrypt = require("bcrypt");
+const express = require('express');
+const { generateOTP, verifyOtp, registerUser } = require('../controllers/auth.controller');
+const router = express.Router();
 
 
-const handleRegisration = async (req,res) => {
-    try{
-        // taking values from body
-        const { username, email, password } = req.body;
+//generate otp route
+router.post("/generateOTP",generateOTP)
 
-        //check for duplicate username and email
-        const duplicateUserByUsername = await prisma.User.findUnique({
-            where: {
-            username,
-            },
-        });
-        const duplicateUserByEmail = await prisma.user.findUnique({
-            where: {
-              email,
-            },
-          });
-        if (duplicateUserByUsername || duplicateUserByEmail){
-          return res.status(409).json({
-            message: "Username or email is already used",
-          });
-        }
-           //encrypt password
-        const hashPassword = await bcrypt.hash(password, 10);
+// verify token
+router.post("/verifyOTP",verifyOtp)
 
-        //create user in database
-        const user = await prisma.user.create({
-        data: {
-            username,
-            email,
-            password: hashPassword,
-        },
-        });
+//register new user after verification 
+router.post("/register",registerUser)
 
-        return res.json({
-        message: `${user.username} is created successfully`,
-        });
 
-    }catch(error){
-        res.send({
-            message: "Registration failed",
-        });
-    }
-};
+
+module.exports=router
+

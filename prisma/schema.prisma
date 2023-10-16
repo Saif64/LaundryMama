@@ -10,29 +10,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  // id should be int type?
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId //Required if the underlying BSON type is OBJECT_ID (ID fields, relation scalars)
-  username  String    @unique
-  email     String    @unique
-  password  String
-  role      Role      @default(USER)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  tokens  Token[]
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId //Required if the underlying BSON type is OBJECT_ID (ID fields, relation scalars)
+  name        String
+  email       String   @unique
+  phoneNumber String   @unique
+  image       String?
+  address     String
+  password    String
+  role        Role     @default(USER)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
-model Token {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  refreshToken String   @unique
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  user         User     @relation(fields: [userId], references: [id])
-  userId       String   @db.ObjectId
+model Otp {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  code      String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Role {
   USER
   ADMIN
+  RIDER
 }

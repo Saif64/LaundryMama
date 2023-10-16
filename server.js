@@ -4,7 +4,10 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const logger=require("./middlewares/logger")
-const expressPino=require("express-pino-logger")
+
+
+//import  routers
+const authRouter=require("./routes/auth.route")
 
 
 
@@ -27,17 +30,12 @@ app.use(
   })
 );
 
-//logger as a middleware
-//logger as middleware
-app.use(expressPino({logger}))
+
+
 
 
 //routes
-app.use("/",(req,res)=>{
-    logger.info("first route")
-    return res.send("The first route o LaundryMama")
-
-})
+app.use("/api/v1.0.0/auth", authRouter);
 
 
 
