@@ -1,3 +1,4 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/pages/homepage.dart';
@@ -5,6 +6,11 @@ import 'package:laundry_mama/pages/login_page.dart';
 import 'package:laundry_mama/pages/signup_page.dart';
 
 void main() {
+  Client client = Client();
+  client
+      .setEndpoint('https://cloud.appwrite.io/v1')
+      .setProject('652a980791a50b3a0e59')
+      .setSelfSigned(status: true);
   runApp(const MyApp());
 }
 
