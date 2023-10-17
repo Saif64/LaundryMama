@@ -148,6 +148,7 @@ const verifyOtp = async (req, res) => {
       },
     });
     return res.status(200).json({
+      isVerified:true,
       status: "success",
       message: "OTP validation successful",
     });
@@ -162,13 +163,16 @@ const verifyOtp = async (req, res) => {
 //register new user
 const registerUser = async (req, res) => {
   try {
-    const { name, email, phoneNumber, image, address, password } = req.body;
-    if (!name || !email || !phoneNumber || !image || !address || !password) {
+    const { name, email, phoneNumber, image, address, password ,isVerified} = req.body;
+
+
+    if (!name || !email || !phoneNumber || !image || !address || !password ||!isVerified) {
       res.status(400).json({
         status: "failed",
         message: "Invalid or incomplete user data",
       });
     }
+    if(is)
 
     try {
       //encrypt password
@@ -179,6 +183,7 @@ const registerUser = async (req, res) => {
           name,
           email,
           phoneNumber,
+          isVerified,
           image,
           address,
           password: hashPassword,

@@ -15,6 +15,7 @@ model User {
   name        String
   email       String   @unique
   phoneNumber String   @unique
+  isVerified  Boolean  @default(false)
   image       String?
   address     String
   password    String
