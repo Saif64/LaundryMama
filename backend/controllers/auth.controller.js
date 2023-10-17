@@ -4,6 +4,7 @@ const otpGenerator = require("otp-generator");
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const bcrypt = require("bcrypt");
+const firebase = require("../utils/firebase/firebaseConfig");
 
 //? generate OTP AND SEND it to the phoneNumber
 const generateOTP = async (req, res) => {
@@ -148,7 +149,7 @@ const verifyOtp = async (req, res) => {
       },
     });
     return res.status(200).json({
-      isVerified:true,
+      isVerified: true,
       status: "success",
       message: "OTP validation successful",
     });
@@ -163,22 +164,29 @@ const verifyOtp = async (req, res) => {
 //register new user
 const registerUser = async (req, res) => {
   try {
-    const { name, email, phoneNumber, image, address, password ,isVerified} = req.body;
+    const { name, email, phoneNumber, image, address, password, isVerified } =
+      req.body;
 
-
-    if (!name || !email || !phoneNumber || !image || !address || !password ||!isVerified) {
+    if (
+      !name ||
+      !email ||
+      !phoneNumber ||
+      !image ||
+      !address ||
+      !password ||
+      !isVerified
+    ) {
       res.status(400).json({
         status: "failed",
         message: "Invalid or incomplete user data",
       });
     }
-    if(is)
 
     try {
       //encrypt password
       const hashPassword = await bcrypt.hash(password, 10);
       //create user in database
-      await prisma.user.create({
+      const user = await prisma.user.create({
         data: {
           name,
           email,
@@ -188,6 +196,18 @@ const registerUser = async (req, res) => {
           address,
           password: hashPassword,
         },
+      });
+      const token = firebase.auth().createCustomToken(user.id, {
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        role: user.role,
+      });
+      res.cookie("LaundryMama JWT", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        maxAge: 24 * 60 * 60 * 1000,
       });
       return res.status(201).json({
         status: "success",
