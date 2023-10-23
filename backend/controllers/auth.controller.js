@@ -5,29 +5,36 @@ const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const bcrypt = require("bcrypt");
 const firebase = require("../utils/firebase/firebaseConfig");
+const jwt = require("jsonwebtoken");
 
 //? generate OTP AND SEND it to the phoneNumber
 const generateOTP = async (req, res) => {
   try {
-    const { email, phoneNumber, name } = req.body;
+    const { email, phoneNumber, register } = req.body;
 
-    //? check is email or phoneNumber already exist in database
-    const duplicateUserByPhoneNumber = await prisma.user.findUnique({
-      where: {
-        phoneNumber,
-      },
-    });
-    const duplicateUserByEmail = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-
-    if (duplicateUserByPhoneNumber || duplicateUserByEmail)
-      return res.status(409).json({
-        status: "failed",
-        message: "Phone number or email is already used",
+    if (register) {
+      //? check is email or phoneNumber already exist in database if this is for register
+      const existedUser = await prisma.user.findFirst({
+        where: {
+          OR: [
+            {
+              email: email,
+            },
+            {
+              phoneNumber: phoneNumber,
+            },
+          ],
+        },
       });
+
+      if (existedUser) {
+        return res.status(409).json({
+          status: "failed",
+          message: "Phone number or email is already used",
+        });
+      }
+    }
+
     //!creating OTP using otp-generator
     const otp = otpGenerator.generate(6, {
       lowerCaseAlphabets: false,
@@ -58,9 +65,9 @@ const generateOTP = async (req, res) => {
 
     let response = {
       body: {
-        name: name,
+        name: "",
         intro: [
-          "Please enter the following verification code to verify your Account.",
+          "Please enter the following verification code to verify your LaundryMama account.",
           `<h2>${otp}</h2>`,
         ],
 
@@ -115,6 +122,7 @@ const generateOTP = async (req, res) => {
       });
     }
   } catch (error) {
+    logger.error(error);
     res.status(400).json({
       status: "failed",
       message: "Something went wrong",
@@ -167,63 +175,65 @@ const registerUser = async (req, res) => {
     const { name, email, phoneNumber, image, address, password, isVerified } =
       req.body;
 
-    if (
-      !name ||
-      !email ||
-      !phoneNumber ||
-      !image ||
-      !address ||
-      !password ||
-      !isVerified
-    ) {
-      res.status(400).json({
-        status: "failed",
-        message: "Invalid or incomplete user data",
-      });
-    }
-
-    try {
-      //encrypt password
-      const hashPassword = await bcrypt.hash(password, 10);
-      //create user in database
-      const user = await prisma.user.create({
-        data: {
-          name,
-          email,
-          phoneNumber,
-          isVerified,
-          image,
-          address,
-          password: hashPassword,
+    if (isVerified) {
+      if (!name || !email || !phoneNumber || !image || !address || !password) {
+        res.status(400).json({
+          status: "failed",
+          message: "Invalid or incomplete user data",
+        });
+      }
+      //? check is email or phoneNumber already exist in database if this is for register
+      const existedUser = await prisma.user.findFirst({
+        where: {
+          OR: [
+            {
+              email: email,
+            },
+            {
+              phoneNumber: phoneNumber,
+            },
+          ],
         },
       });
-      const token = firebase.auth().createCustomToken(user.id, {
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        role: user.role,
-      });
-      res.cookie("LaundryMama JWT", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "None",
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-      return res.status(201).json({
-        status: "success",
-        message: "New account is created successfully",
-      });
-    } catch (error) {
-      logger.error(error);
-      return res.status(500).json({
-        status: "failed",
-        message: "Signup failed",
-      });
+
+      if (existedUser) {
+        return res.status(409).json({
+          status: "failed",
+          message: "Phone number or email is already used",
+        });
+      }
+
+      try {
+        //encrypt password
+        const hashPassword = await bcrypt.hash(password, 10);
+        //create user in database
+        await prisma.user.create({
+          data: {
+            name,
+            email,
+            phoneNumber,
+            isVerified,
+            image,
+            address,
+            password: hashPassword,
+          },
+        });
+        return res.status(201).json({
+          status: "success",
+          message: "New account is created successfully",
+        });
+      } catch (error) {
+        logger.error(error);
+        return res.status(500).json({
+          status: "failed",
+          message: "register failed",
+        });
+      }
     }
   } catch (error) {
     res.status(400).json({
       status: "failed",
-      message: "Something went wrong",
+      message: "You have to verify your account first",
     });
   }
 };
