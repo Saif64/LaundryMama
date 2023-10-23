@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/auth_icons.dart';
 import 'package:laundry_mama/widgets/auth_page_input.dart';
 import 'package:laundry_mama/widgets/head2.dart';
@@ -50,6 +51,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
     setState(() {
       isAuthenticating = true;
     });
+    Navigator.pushReplacementNamed(context, OTP_PAGE);
   }
 
   String? validateEmail(String? value) {
@@ -163,16 +165,15 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                     duration: const Duration(milliseconds: 875),
                   ),
 
-              const SizedBox(height: 10),
-
               const SizedBox(height: 30),
+
               // sign in button
-              if (isAuthenticating) onClickLogin,
-              if (!isAuthenticating)
-                LongButton(
-                  onTap: registerUser,
-                  text: 'Create an account',
-                ),
+              // if (isAuthenticating) onClickLogin,
+              // if (isAuthenticating)
+              LongButton(
+                onTap: registerUser,
+                text: 'Create an account',
+              ),
               const SizedBox(height: 15),
               // or continue with
               Padding(

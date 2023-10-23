@@ -35,7 +35,7 @@ class AuthInput extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
           ),
-          fillColor: Colors.grey.shade200,
+          // fillColor: Colors.grey.shade200,
           filled: true,
         ),
       ),
