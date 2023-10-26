@@ -123,7 +123,7 @@ const generateOTP = async (req, res) => {
     }
   } catch (error) {
     logger.error(error);
-    res.status(400).json({
+    return res.status(400).json({
       status: "failed",
       message: "Something went wrong",
     });
@@ -162,7 +162,7 @@ const verifyOtp = async (req, res) => {
       message: "OTP validation successful",
     });
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "failed",
       message: "Something went wrong",
     });
@@ -177,7 +177,7 @@ const registerUser = async (req, res) => {
 
     if (isVerified) {
       if (!name || !email || !phoneNumber || !image || !address || !password) {
-        res.status(400).json({
+        return res.status(400).json({
           status: "failed",
           message: "Invalid or incomplete user data",
         });
@@ -231,15 +231,95 @@ const registerUser = async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "failed",
       message: "You have to verify your account first",
     });
   }
 };
 
+//signin user
+const handleLogin = async (req, res) => {
+  //?extract email and password from the body of req and check if any value is missing
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      status: "failed",
+      message: "Invalid or incomplete user data",
+    });
+  }
+
+  //?find the user in db using email
+  const findUser = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  if (!findUser)
+    return res.status(401).json({
+      status: "failed",
+      message: "Email or Password doesn't match with any account",
+    }); //Unauthorized
+
+  //? evaluate and compare password
+  const matchPassword = await bcrypt.compare(password, findUser.password);
+  if (!matchPassword) {
+    return res.status(401).json({
+      status: "failed",
+      message: "Email or Password doesn't match with any account",
+    }); //Unauthorized
+  }
+
+  //?creating accessToken and refreshToken
+  const accessToken = jwt.sign(
+    {
+      id: findUser.id,
+      email: findUser.email,
+      role: findUser.role,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "60s" }
+  );
+  const refreshToken = jwt.sign(
+    {
+      id: findUser.id,
+      email: findUser.email,
+      role: findUser.role,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: "180s" }
+  );
+
+  //?Update the user in the database with the refresh token.
+  await prisma.user.update({
+    where: {
+      email: findUser.email,
+    },
+    data: {
+      refreshToken: refreshToken,
+    },
+  });
+
+  //? // Creates Secure Cookie with refresh token
+  res.cookie("laundryMama jwt", refreshToken, {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+    maxAge: 3 * 60 * 1000, //3min
+  });
+  //? return accessToken in res
+  return res.status(200).json({
+    accessToken: accessToken,
+    status: "failed",
+    message: "Logged in  successfully",
+  });
+
+
+};
+
 module.exports = {
   generateOTP,
   verifyOtp,
   registerUser,
+  handleLogin,
 };

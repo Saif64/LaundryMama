@@ -1,5 +1,5 @@
 const express = require('express');
-const { generateOTP, verifyOtp, registerUser } = require('../controllers/auth.controller');
+const { generateOTP, verifyOtp, registerUser, handleLogin } = require('../controllers/auth.controller');
 const router = express.Router();
 
 
@@ -11,6 +11,9 @@ router.post("/verifyOTP",verifyOtp)
 
 //register new user after verification 
 router.post("/register",registerUser)
+
+//sign in
+router.get("/signin",handleLogin)
 
 
 
