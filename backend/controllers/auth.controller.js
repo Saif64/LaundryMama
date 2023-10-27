@@ -319,14 +319,14 @@ const handleSignin = async (req, res) => {
 const handleSignout = async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.laundryMamaJwt)
-    return res.status(204).json({
+    return res.status(401).json({
       status: "failed",
       message: "No refresh token found",
     }); //No content
   const refreshToken = cookies.laundryMamaJwt;
 
   //?Is refreshToken in db?
-  const findUser = await prisma.user.findFirst({
+  const findUser = await prisma.user.findUnique({
     where: {
       refreshToken: refreshToken,
     },
@@ -337,10 +337,10 @@ const handleSignout = async (req, res) => {
       sameSite: "None",
       secure: true,
     });
-    return res.status(204).json({
+    return res.status(403).json({
       status: "failed",
-      message: "No refresh token found",
-    }); //No content
+      message: "Not Authorized",
+    });
   }
 
   //?remove refresh token from db and delete it from cookie
@@ -364,10 +364,58 @@ const handleSignout = async (req, res) => {
   });
 };
 
+//update expired access token
+const updateAccessToken = async (req, res) => {
+  const cookies = req.cookies;
+  if (!cookies?.laundryMamaJwt)
+    return res.status(401).json({
+      status: "failed",
+      message: "No refresh token found",
+    }); //No content
+  const refreshToken = cookies.laundryMamaJwt;
+
+  //?Is refreshToken in db?
+  const findUser = await prisma.user.findFirst({
+    where: {
+      refreshToken: refreshToken,
+    },
+  });
+  if (!findUser) {
+    return res.status(403).json({
+      status: "failed",
+      message: "Not Authorized",
+    });
+  }
+
+  //?verify jwt
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err || findUser.id !== decoded.id)
+      return res.status(403).json({
+        status: "failed",
+        message: "Not Authorized",
+      });
+    const accessToken = jwt.sign(
+      {
+        id: decoded.id,
+        email: decoded.email,
+        role: decoded.role,
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "60s" }
+    );
+    return res.status(200).json({
+      accessToken: accessToken,
+      status: "success",
+      message: "Access token updated successfully",
+    });
+  });
+};
+
 module.exports = {
   generateOTP,
   verifyOtp,
   registerUser,
   handleSignin,
   handleSignout,
+  updateAccessToken
 };

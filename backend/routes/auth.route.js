@@ -1,5 +1,5 @@
 const express = require('express');
-const { generateOTP, verifyOtp, registerUser, handleSignin, handleSignout } = require('../controllers/auth.controller');
+const { generateOTP, verifyOtp, registerUser, handleSignin, handleSignout, updateAccessToken } = require('../controllers/auth.controller');
 const router = express.Router();
 
 
@@ -18,7 +18,8 @@ router.get("/signin",handleSignin)
 //sign out
 router.get("/signout",handleSignout)
 
-
+//update Access token
+router.get("/updateAT",updateAccessToken)
 
 
 
