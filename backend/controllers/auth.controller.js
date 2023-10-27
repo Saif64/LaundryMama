@@ -392,7 +392,7 @@ const updateAccessToken = async (req, res) => {
     if (err || findUser.id !== decoded.id)
       return res.status(403).json({
         status: "failed",
-        message: "Not Authorized",
+        message: "Invalid access token",
       });
     const accessToken = jwt.sign(
       {
