@@ -239,7 +239,7 @@ const registerUser = async (req, res) => {
 };
 
 //signin user
-const handleLogin = async (req, res) => {
+const handleSignin = async (req, res) => {
   //?extract email and password from the body of req and check if any value is missing
   const { email, password } = req.body;
   if (!email || !password) {
@@ -301,7 +301,7 @@ const handleLogin = async (req, res) => {
   });
 
   //? // Creates Secure Cookie with refresh token
-  res.cookie("laundryMama jwt", refreshToken, {
+  res.cookie("laundryMamaJwt", refreshToken, {
     httpOnly: true,
     sameSite: "None",
     secure: true,
@@ -310,16 +310,64 @@ const handleLogin = async (req, res) => {
   //? return accessToken in res
   return res.status(200).json({
     accessToken: accessToken,
-    status: "failed",
+    status: "success",
     message: "Logged in  successfully",
   });
+};
 
+//signout
+const handleSignout = async (req, res) => {
+  const cookies = req.cookies;
+  if (!cookies?.laundryMamaJwt)
+    return res.status(204).json({
+      status: "failed",
+      message: "No refresh token found",
+    }); //No content
+  const refreshToken = cookies.laundryMamaJwt;
 
+  //?Is refreshToken in db?
+  const findUser = await prisma.user.findFirst({
+    where: {
+      refreshToken: refreshToken,
+    },
+  });
+  if (!findUser) {
+    res.clearCookie("laundryMamaJwt", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+    return res.status(204).json({
+      status: "failed",
+      message: "No refresh token found",
+    }); //No content
+  }
+
+  //?remove refresh token from db and delete it from cookie
+  await prisma.user.update({
+    where: {
+      refreshToken: refreshToken,
+    },
+    data: {
+      refreshToken: "",
+    },
+  });
+  res.clearCookie("laundryMamaJwt", {
+    httpOnly: true,
+    sameSite: "None",
+    secure: true,
+  });
+
+  return res.status(200).json({
+    status: "success",
+    message: "Signed out successfully",
+  });
 };
 
 module.exports = {
   generateOTP,
   verifyOtp,
   registerUser,
-  handleLogin,
+  handleSignin,
+  handleSignout,
 };
