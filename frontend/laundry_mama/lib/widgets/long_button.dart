@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class LongButton extends StatelessWidget {
@@ -23,7 +24,7 @@ class LongButton extends StatelessWidget {
         child: Center(
           child: FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(
+            child: AutoSizeText(
               text,
               style: const TextStyle(
                 color: Colors.white,

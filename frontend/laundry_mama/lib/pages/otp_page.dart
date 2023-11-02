@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:lottie/lottie.dart';
@@ -28,7 +29,7 @@ class _OtpPageState extends State<OtpPage> {
           SizedBox(
             height: height * 0.03,
           ),
-          const Text(
+          const AutoSizeText(
             'Enter your 6 digit OTP to authenticate your number',
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -55,7 +56,7 @@ class _OtpPageState extends State<OtpPage> {
           SizedBox(height: height * 0.02),
           TextButton(
               onPressed: () {},
-              child: const Text(
+              child: const AutoSizeText(
                 'Send Again',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,

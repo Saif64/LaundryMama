@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:laundry_mama/global/routes.dart';
@@ -163,17 +164,17 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  AutoSizeText(
                     'Not a member yet???',
                     style: TextStyle(
                       color: Colors.grey[700],
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: width * 0.009),
                   InkWell(
                     onTap: widget.onTap,
-                    child: const Text(
+                    child: const AutoSizeText(
                       'Let\'s register',
                       style: TextStyle(
                         color: Colors.blue,

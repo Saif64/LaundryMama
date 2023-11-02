@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -239,17 +240,17 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  AutoSizeText(
                     'Already a member?',
                     style: TextStyle(
                       color: Colors.grey[700],
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: width * 0.009),
                   InkWell(
                     onTap: widget.onTap,
-                    child: const Text(
+                    child: const AutoSizeText(
                       'Login instead',
                       style: TextStyle(
                         color: Colors.blue,
