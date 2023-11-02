@@ -18,6 +18,9 @@ class _OtpPageState extends State<OtpPage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,6 +50,7 @@ class _OtpPageState extends State<OtpPage> {
             isDense: true,
             onCompleted: (value) {
               print("completed" + value);
+              Navigator.of(context).popUntil((route) => route.isFirst);
               Navigator.pushReplacementNamed(context, HOMEPAGE);
             },
             style: const TextStyle(
