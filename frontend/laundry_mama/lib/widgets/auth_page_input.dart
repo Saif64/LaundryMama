@@ -21,7 +21,8 @@ class AuthInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.055),
       child: TextFormField(
         validator: validator,
         controller: controller,

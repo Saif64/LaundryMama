@@ -14,6 +14,8 @@ class OtpPage extends StatefulWidget {
 class _OtpPageState extends State<OtpPage> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -21,10 +23,10 @@ class _OtpPageState extends State<OtpPage> {
         children: [
           Lottie.asset(
             'assets/animations/otp.json',
-            height: 250,
+            height: height * 0.27,
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: height * 0.03,
           ),
           const Text(
             'Enter your 6 digit OTP to authenticate your number',
@@ -32,8 +34,8 @@ class _OtpPageState extends State<OtpPage> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: height * 0.03,
           ),
           OTPTextField(
             length: 6,
@@ -50,7 +52,7 @@ class _OtpPageState extends State<OtpPage> {
               fontSize: 17,
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: height * 0.02),
           TextButton(
               onPressed: () {},
               child: const Text(

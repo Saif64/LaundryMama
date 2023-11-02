@@ -91,6 +91,9 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
   // Build Methods & Widgets
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -104,10 +107,9 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Lottie.asset(
-                'assets/animations/register.json',
-                controller: _registerAnimationController,
-              ),
+              Lottie.asset('assets/animations/register.json',
+                  controller: _registerAnimationController,
+                  height: height * 0.2),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 36,
@@ -126,7 +128,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                       delay: const Duration(milliseconds: 370),
                     ),
               ),
-              const SizedBox(height: 35),
+              SizedBox(height: height * 0.035),
 
               // username textfield
               AuthInput(
@@ -140,7 +142,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                     duration: const Duration(milliseconds: 875),
                   ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: height * 0.015),
               // Phone Number textfield
               AuthInput(
                 controller: _phoneNumber,
@@ -152,7 +154,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                     duration: const Duration(milliseconds: 875),
                   ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: height * 0.015),
               // password textfield
               AuthInput(
                 controller: _passwordController,
@@ -165,7 +167,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                     duration: const Duration(milliseconds: 875),
                   ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.03),
 
               // sign in button
               // if (isAuthenticating) onClickLogin,
@@ -174,11 +176,11 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 onTap: registerUser,
                 text: 'Create an account',
               ),
-              const SizedBox(height: 15),
+              SizedBox(height: height * 0.015),
               // or continue with
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.07, vertical: height * 0.015),
                 child: Row(
                   children: [
                     Expanded(
@@ -204,7 +206,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 ),
               ),
 
-              const SizedBox(height: 15),
+              SizedBox(height: height * 0.015),
               // google + apple sign in buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -218,7 +220,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                         duration: const Duration(milliseconds: 875),
                       ),
 
-                  const SizedBox(width: 25),
+                  SizedBox(width: width * 0.04),
 
                   // apple button
                   AuthIconButton(
@@ -231,7 +233,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 ],
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.035),
 
               // not a member? register now
               Row(

@@ -22,7 +22,7 @@ class AuthIconButton extends StatelessWidget {
         ),
         child: Image.asset(
           imagePath,
-          height: 40,
+          height: MediaQuery.of(context).size.height * 0.03,
         ),
       ),
     );

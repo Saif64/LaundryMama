@@ -48,6 +48,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -61,7 +64,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             children: [
               Lottie.asset(
                 'assets/animations/login_animation.json',
-                height: 250,
+                height: height * 0.27,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -77,7 +80,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       delay: const Duration(milliseconds: 370),
                     ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.035),
               AuthInput(
                 controller: _emailController,
                 hintText: 'Email',
@@ -85,7 +88,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 inputType: TextInputType.emailAddress,
                 labelText: 'Email',
               ),
-              const SizedBox(height: 25),
+              SizedBox(height: height * 0.015),
               AuthInput(
                 controller: _passwordController,
                 hintText: 'Password',
@@ -93,15 +96,15 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 inputType: TextInputType.visiblePassword,
                 labelText: 'Password',
               ),
-              const SizedBox(height: 25),
+              SizedBox(height: height * 0.035),
               LongButton(
                 onTap: () => Navigator.pushReplacementNamed(context, HOMEPAGE),
                 text: 'Continue the journey',
               ),
-              const SizedBox(height: 15),
+              SizedBox(height: height * 0.01),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+                padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.07, vertical: height * 0.015),
                 child: Row(
                   children: [
                     Expanded(
@@ -127,7 +130,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 ),
               ),
 
-              const SizedBox(height: 15),
+              SizedBox(height: height * 0.015),
               // google + apple sign in buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +144,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         duration: const Duration(milliseconds: 875),
                       ),
 
-                  const SizedBox(width: 25),
+                  SizedBox(width: width * 0.04),
 
                   // apple button
                   AuthIconButton(
@@ -154,7 +157,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 ],
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.035),
 
               // not a member? register now
               Row(
