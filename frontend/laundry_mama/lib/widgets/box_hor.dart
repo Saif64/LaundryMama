@@ -32,7 +32,7 @@ class HorizBox extends StatelessWidget {
       child: Container(
         width: containerWidth,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+          border: Border.all(color: const Color.fromARGB(255, 84, 74, 74)),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
@@ -56,7 +56,9 @@ class HorizBox extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
-                    color: isCurrent ? Colors.white : Colors.black,
+                    color: isCurrent
+                        ? Colors.white
+                        : Color.fromARGB(255, 184, 152, 152),
                   ),
                 ),
               ),

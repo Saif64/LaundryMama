@@ -63,9 +63,14 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         child: Center(
           child: Column(
             children: [
-              Lottie.asset(
-                'assets/animations/login_animation.json',
-                height: height * 0.27,
+              ColorFiltered(
+                colorFilter:
+                    ColorFilter.mode(Colors.deepPurple, BlendMode.srcATop),
+                child: Lottie.asset(
+                  'assets/animations/login_animation.json',
+                  height: height * 0.27,
+                  reverse: true,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -117,11 +122,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         color: Colors.grey[400],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                         'Or Login with',
-                        style: TextStyle(color: Colors.grey[700]),
                       ),
                     ),
                     Expanded(
@@ -167,10 +171,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AutoSizeText(
+                  const AutoSizeText(
                     'Not a member yet???',
                     style: TextStyle(
-                      color: Colors.grey[700],
                       fontWeight: FontWeight.bold,
                     ),
                   ),

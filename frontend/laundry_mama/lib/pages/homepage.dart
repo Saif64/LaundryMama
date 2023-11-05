@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/box_hor.dart';
+import 'package:laundry_mama/widgets/long_button.dart';
 
 import '../widgets/head4.dart';
 import '../widgets/price_chart.dart';
@@ -84,7 +86,14 @@ class _HomePageState extends State<HomePage> {
                 text: 'Price Chart',
               ),
               Gap(height * 0.018),
-              PriceChart(height: height, width: width)
+              PriceChart(height: height, width: width),
+              Gap(height * 0.03),
+              LongButton(
+                onTap: () => Navigator.pushNamed(context, NEW_ORDER),
+                text: 'Add clothes into your basket ',
+                color: const Color.fromARGB(255, 63, 34, 113),
+                fontsize: 18,
+              ),
             ],
           ),
         ),
@@ -102,7 +111,7 @@ class _HomePageState extends State<HomePage> {
         child: Row(children: [
           Icon(
             Icons.location_on_outlined,
-            color: Theme.of(context).shadowColor,
+            color: Colors.amber[900],
           ),
           Hero(
             tag: 'address',
@@ -111,8 +120,9 @@ class _HomePageState extends State<HomePage> {
               child: AutoSizeText(
                 initialLocation,
                 style: TextStyle(
-                    color: Theme.of(context).shadowColor,
-                    fontWeight: FontWeight.w700),
+                  color: Colors.amber[900],
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),

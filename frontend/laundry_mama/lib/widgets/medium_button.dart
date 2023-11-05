@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-class LongButton extends StatelessWidget {
+class MediumButton extends StatelessWidget {
   final Function()? onTap;
   final String text;
   final Color? color;
   final double? fontsize;
 
-  const LongButton(
+  const MediumButton(
       {super.key,
       required this.onTap,
       required this.text,
@@ -20,10 +20,9 @@ class LongButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.055,
-            vertical: MediaQuery.of(context).size.height * 0.025),
+            vertical: MediaQuery.of(context).size.height * 0.02),
         margin: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.055),
+            horizontal: MediaQuery.of(context).size.width * 0.28),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(8),

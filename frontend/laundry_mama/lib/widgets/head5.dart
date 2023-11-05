@@ -6,9 +6,11 @@ class Head5 extends StatelessWidget {
     super.key,
     required this.text,
     this.color,
+    this.fontWeight = FontWeight.w700,
   });
   final String text;
   final Color? color;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class Head5 extends StatelessWidget {
       style: TextStyle(
         fontSize: 18,
         color: color,
-        fontWeight: FontWeight.w700,
+        fontWeight: fontWeight,
       ),
     );
   }

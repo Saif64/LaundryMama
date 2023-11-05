@@ -3,6 +3,7 @@ import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/pages/address_page.dart';
 import 'package:laundry_mama/pages/homepage.dart';
 import 'package:laundry_mama/pages/login_page.dart';
+import 'package:laundry_mama/pages/new_order.dart';
 import 'package:laundry_mama/pages/otp_page.dart';
 import 'package:laundry_mama/pages/signup_page.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData.dark(useMaterial3: true),
       theme: ThemeData.light(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       initialRoute: HOMEPAGE,
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
               onTap: () => Navigator.pushReplacementNamed(context, SIGNUP_PAGE),
             ),
         OTP_PAGE: (context) => OtpPage(),
-        ADDRESS_PAGE: (context) => AdressPage()
+        ADDRESS_PAGE: (context) => AdressPage(),
+        NEW_ORDER: (context) => NewOrder(),
       },
     );
   }

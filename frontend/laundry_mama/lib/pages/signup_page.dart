@@ -108,9 +108,11 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Lottie.asset('assets/animations/register.json',
-                  controller: _registerAnimationController,
-                  height: height * 0.2),
+              Lottie.asset(
+                'assets/animations/register.json',
+                controller: _registerAnimationController,
+                height: height * 0.2,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 36,
@@ -190,11 +192,10 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                         color: Colors.grey[400],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                         'Or continue with',
-                        style: TextStyle(color: Colors.grey[700]),
                       ),
                     ),
                     Expanded(
@@ -243,7 +244,6 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                   AutoSizeText(
                     'Already a member?',
                     style: TextStyle(
-                      color: Colors.grey[700],
                       fontWeight: FontWeight.bold,
                     ),
                   ),
