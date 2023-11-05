@@ -99,7 +99,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               ),
               SizedBox(height: height * 0.035),
               LongButton(
-                onTap: () => Navigator.pushReplacementNamed(context, HOMEPAGE),
+                onTap: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushReplacementNamed(context, HOMEPAGE);
+                },
                 text: 'Continue the journey',
               ),
               SizedBox(height: height * 0.01),

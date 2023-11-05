@@ -1,6 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:laundry_mama/global/routes.dart';
+import 'package:laundry_mama/widgets/box_hor.dart';
+
+import '../widgets/head4.dart';
+import '../widgets/price_chart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,60 +27,126 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: TextButton(
-          onPressed: toAdressPage,
-          child: Row(children: [
-            Icon(
-              Icons.location_on_outlined,
-              color: Theme.of(context).shadowColor,
-            ),
-            AutoSizeText(
-              initialLocation,
-              style: TextStyle(
-                color: Theme.of(context).shadowColor,
-              ),
-            ),
-          ]),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {},
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.015),
-              child: CircleAvatar(
-                maxRadius: width * 0.05,
-                minRadius: width * 0.03,
-                backgroundColor: Colors.red,
-                child: const Icon(
-                  Icons.shopping_bag_rounded,
-                  color: Colors.white,
+      appBar: homepageAppbar(context, width),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.065),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(height * 0.025),
+              const AutoSizeText(
+                'Hi, saif',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
-            ),
-          ),
-          GestureDetector(
-            onTap: toSignupPage,
-            child: Padding(
-              padding: EdgeInsets.all(width * 0.015),
-              child: CircleAvatar(
-                maxRadius: width * 0.05,
-                minRadius: width * 0.03,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
-                    'assets/images/profile_avatar.png',
+              Gap(height * 0.015),
+              const Head4(text: 'Get your clothes done in \n3 simple steps'),
+              Gap(height * 0.012),
+              SizedBox(
+                height: height * 0.18,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      HorizBox(
+                        buttonText: 'Add Clothes',
+                        descriptionText:
+                            'Start your \nlaundry by adding basket',
+                        isCurrent: true,
+                        containerWidth: width * 0.36,
+                        onPressed: () {},
+                      ),
+                      HorizBox(
+                        buttonText: 'Reivew',
+                        descriptionText:
+                            'Laundry in process... \nthanks for waiting',
+                        isCurrent: false,
+                        containerWidth: width * 0.42,
+                      ),
+                      HorizBox(
+                        buttonText: 'Reivew',
+                        descriptionText: 'Out for delivery ',
+                        isCurrent: false,
+                        containerWidth: width * 0.42,
+                      ),
+                    ],
                   ),
                 ),
               ),
+              Gap(height * 0.018),
+              const Head4(
+                text: 'Price Chart',
+              ),
+              Gap(height * 0.018),
+              PriceChart(height: height, width: width)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  AppBar homepageAppbar(BuildContext context, double width) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      centerTitle: false,
+      title: TextButton(
+        onPressed: toAdressPage,
+        child: Row(children: [
+          Icon(
+            Icons.location_on_outlined,
+            color: Theme.of(context).shadowColor,
+          ),
+          Hero(
+            tag: 'address',
+            child: Material(
+              type: MaterialType.transparency,
+              child: AutoSizeText(
+                initialLocation,
+                style: TextStyle(
+                    color: Theme.of(context).shadowColor,
+                    fontWeight: FontWeight.w700),
+              ),
             ),
           ),
-        ],
+        ]),
       ),
+      actions: [
+        GestureDetector(
+          onTap: () {},
+          child: Padding(
+            padding: EdgeInsets.all(width * 0.015),
+            child: CircleAvatar(
+              maxRadius: width * 0.05,
+              minRadius: width * 0.03,
+              backgroundColor: Colors.red,
+              child: const Icon(
+                Icons.shopping_bag_rounded,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: toSignupPage,
+          child: Padding(
+            padding: EdgeInsets.all(width * 0.015),
+            child: CircleAvatar(
+              maxRadius: width * 0.05,
+              minRadius: width * 0.03,
+              backgroundImage:
+                  const AssetImage('assets/images/professional image.jpeg'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
