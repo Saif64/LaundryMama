@@ -2,10 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
+import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/head4.dart';
 import 'package:laundry_mama/widgets/head5.dart';
-
-import 'package:laundry_mama/widgets/medium_button.dart';
+import 'package:laundry_mama/widgets/round_button.dart';
 
 class TypesOfService extends StatefulWidget {
   const TypesOfService({super.key});
@@ -46,49 +46,55 @@ class _TypesOfServiceState extends State<TypesOfService> {
               const Head4(text: 'Let\'s proceed with your order'),
               Gap(height * 0.02),
               const Head5(
-                text: 'Costumise select how you wish to \ndo your laundry',
+                text: 'Costumise what service you wish to \nhave from us',
                 fontWeight: FontWeight.w400,
               ),
               Gap(height * 0.05),
               SizedBox(
                 height: height * 0.4,
                 child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: services.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Colors.grey,
                           ),
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        child: ListTile(
-                          title: AutoSizeText(services[index]),
-                          selectedColor: Colors.amber[900],
-                          trailing: Icon(
-                            index == _selectedIndex
-                                ? Icons.check
-                                : Icons.circle_outlined,
-                            color: Colors.green,
-                          ),
-                          selected: index == _selectedIndex,
-                          onTap: () {
-                            setState(() {
-                              _selectedIndex = index;
-                            });
-                          },
+                        title: AutoSizeText(services[index]),
+                        selectedColor: Colors.amber[900],
+                        trailing: Icon(
+                          index == _selectedIndex
+                              ? Icons.check
+                              : Icons.circle_outlined,
+                          color: Colors.green,
                         ),
+                        selected: index == _selectedIndex,
+                        onTap: () {
+                          setState(() {
+                            _selectedIndex = index;
+                          });
+                        },
                       ),
                     );
                   },
                 ),
               ),
               Gap(height * 0.001),
-              MediumButton(
-                onTap: () {},
-                text: 'Next',
+              Align(
+                alignment: Alignment.center,
+                child: RoundButton(
+                  onTap: () => Navigator.pushNamed(context, QUANTITY_PAGE),
+                  icon: Icon(
+                    Icons.keyboard_arrow_right_rounded,
+                    size: 35,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),

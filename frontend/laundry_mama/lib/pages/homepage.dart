@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/box_hor.dart';
-import 'package:laundry_mama/widgets/long_button.dart';
+import 'package:laundry_mama/widgets/offer_progress_card.dart';
 
 import '../widgets/head4.dart';
 import '../widgets/price_chart.dart';
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Gap(height * 0.025),
               const AutoSizeText(
-                'Hi, saif',
+                'Hi, saif,',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w300,
@@ -82,19 +82,30 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Gap(height * 0.018),
+              const Head4(
+                text: 'Offers & more',
+              ),
+              SizedBox(
+                height: height * 0.22,
+                child: ListView.builder(
+                  itemCount: 2,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return OfferProgressCard(
+                      containerWidth: width * 0.78,
+                      headline: 'Laundry in Progress',
+                      subHeader: 'You can see \nin various stages',
+                      backgroundColor: Color.fromARGB(255, 0, 129, 189),
+                    );
+                  },
+                ),
+              ),
               const Head4(
                 text: 'Price Chart',
               ),
               Gap(height * 0.018),
               PriceChart(height: height, width: width),
               Gap(height * 0.03),
-              LongButton(
-                onTap: () => Navigator.pushNamed(context, NEW_ORDER),
-                text: 'Add clothes into your basket ',
-                color: const Color.fromARGB(255, 63, 34, 113),
-                fontsize: 18,
-              ),
             ],
           ),
         ),
@@ -105,6 +116,7 @@ class _HomePageState extends State<HomePage> {
   AppBar homepageAppbar(BuildContext context, double width) {
     return AppBar(
       elevation: 0,
+      surfaceTintColor: Colors.transparent,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       centerTitle: false,
       title: TextButton(
@@ -139,7 +151,7 @@ class _HomePageState extends State<HomePage> {
               minRadius: width * 0.03,
               backgroundColor: Colors.red,
               child: const Icon(
-                Icons.shopping_bag_rounded,
+                Icons.shopping_basket_outlined,
                 color: Colors.white,
               ),
             ),
