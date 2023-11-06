@@ -2,8 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/box_hor.dart';
+import 'package:laundry_mama/widgets/head6.dart';
 import 'package:laundry_mama/widgets/offer_progress_card.dart';
 
 import '../widgets/head4.dart';
@@ -86,22 +88,35 @@ class _HomePageState extends State<HomePage> {
                 text: 'Offers & more',
               ),
               SizedBox(
-                height: height * 0.22,
+                height: height * 0.2,
                 child: ListView.builder(
-                  itemCount: 2,
+                  itemCount: offerNMore.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return OfferProgressCard(
                       containerWidth: width * 0.78,
-                      headline: 'Laundry in Progress',
-                      subHeader: 'You can see \nin various stages',
-                      backgroundColor: Color.fromARGB(255, 0, 129, 189),
+                      headline: offerNMore[index]["headline"].toString(),
+                      subHeader: offerNMore[index]['subHeader'].toString(),
+                      backgroundColor: const Color.fromARGB(255, 0, 129, 189),
                     );
                   },
                 ),
               ),
-              const Head4(
-                text: 'Price Chart',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Head4(
+                    text: 'Price Chart',
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Head6(
+                      text: 'View All',
+                      fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
+                    ),
+                  )
+                ],
               ),
               Gap(height * 0.018),
               PriceChart(height: height, width: width),

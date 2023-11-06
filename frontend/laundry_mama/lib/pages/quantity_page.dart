@@ -17,9 +17,22 @@ class QuantityPage extends StatefulWidget {
 }
 
 class _QuantityPageState extends State<QuantityPage> {
-  var countItemTotal = 0;
-  var countItemOwn = 0;
+  int totalQuantity = 0;
   var selectedIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    calculateTotalQuantity();
+  }
+
+  void calculateTotalQuantity() {
+    int total = 0;
+    for (var item in items) {
+      total += (item['quantity'] as int);
+    }
+    totalQuantity = total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,50 +68,55 @@ class _QuantityPageState extends State<QuantityPage> {
                     return Padding(
                       padding: EdgeInsets.symmetric(vertical: height * 0.008),
                       child: ListTile(
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: Colors.grey,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Colors.grey,
                           ),
-                          title: AutoSizeText(
-                            items[index]["item"].toString(),
-                            style: GoogleFonts.nunito(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 18,
-                            ),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        title: AutoSizeText(
+                          items[index]["item"].toString(),
+                          style: GoogleFonts.nunito(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 18,
                           ),
-                          subtitle: AutoSizeText(
-                            items[index]["price"].toString(),
+                        ),
+                        subtitle: AutoSizeText(
+                          items[index]["price"].toString(),
+                        ),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.network(
+                            items[index]["url"].toString(),
                           ),
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.network(
-                              items[index]["url"].toString(),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove),
+                              onPressed: () {
+                                if (items[index]['quantity'] > 0) {
+                                  setState(() {
+                                    items[index]['quantity']--;
+                                    calculateTotalQuantity();
+                                  });
+                                }
+                              },
                             ),
-                          ),
-                          // selected: index == selectedIndex,
-                          trailing: DropdownButton<int>(
-                            value: countItemOwn,
-                            icon: Icon(
-                              Icons.arrow_drop_down_rounded,
-                              color: Colors.amber[900],
+                            Text(items[index]['quantity'].toString()),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () {
+                                setState(() {
+                                  items[index]['quantity']++;
+                                  calculateTotalQuantity();
+                                });
+                              },
                             ),
-                            elevation: 16,
-                            style: TextStyle(color: Colors.amber[900]),
-                            onChanged: (int? value) {
-                              setState(() {
-                                countItemOwn = value!;
-                              });
-                            },
-                            items: [0, 1, 2, 3, 4, 5, 6]
-                                .map<DropdownMenuItem<int>>((int value) {
-                              return DropdownMenuItem<int>(
-                                value: value,
-                                child: Text(value.toString()),
-                              );
-                            }).toList(),
-                          )),
+                          ],
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -135,7 +153,7 @@ class _QuantityPageState extends State<QuantityPage> {
                             Navigator.pushNamed(context, TIME_SLOT_PAGE),
                         icon: const Icon(
                           Icons.date_range_rounded,
-                          size: 35,
+                          size: 30,
                           color: Colors.white,
                         ),
                       ),
@@ -152,7 +170,7 @@ class _QuantityPageState extends State<QuantityPage> {
                         onTap: () {},
                         icon: const Icon(
                           Icons.add_shopping_cart_rounded,
-                          size: 35,
+                          size: 30,
                           color: Colors.white,
                         ),
                       ),
@@ -165,11 +183,6 @@ class _QuantityPageState extends State<QuantityPage> {
                   ),
                 ],
               ),
-              // MediumButton(
-              //   onTap: () => Navigator.pushNamed(context, TIME_SLOT_PAGE),
-              //   text: 'Pickup Time',
-              //   fontsize: 18,
-              // ),
               Gap(height * 0.07),
             ],
           ),

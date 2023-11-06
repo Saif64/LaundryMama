@@ -19,7 +19,7 @@ class PriceChart extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: height * 0.28,
+          height: height * 0.25,
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 41, 47, 57),
             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -37,6 +37,7 @@ class PriceChart extends StatelessWidget {
                 Gap(height * 0.018),
                 Expanded(
                   child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
@@ -58,7 +59,7 @@ class PriceChart extends StatelessWidget {
           top: 10,
           right: 10,
           child: Icon(
-            Icons.track_changes_outlined,
+            Icons.shopping_basket_outlined,
             size: MediaQuery.of(context).size.width * 0.15,
             color: Colors.white,
           ),

@@ -1,4 +1,4 @@
-const items = [
+List<Map<String, dynamic>> items = [
   {
     "id": 1,
     "item": "Shirt",
@@ -28,7 +28,7 @@ const items = [
     "item": "Pant",
     "price": "BDT 15",
     "url":
-        "https://res.cloudinary.com/dpsu6lwgv/image/upload/v1699275783/laundryWala/items/ivo6qaqudyww2cjgb8wo.png",
+        "https://res.cloudinary.com/dpsu6lwgv/image/upload/v1699288181/laundryWala/items/ccb34ebm4684gbfyqplv.png",
     "quantity": 0,
   },
   {
@@ -38,5 +38,16 @@ const items = [
     "url":
         "https://res.cloudinary.com/dpsu6lwgv/image/upload/v1699274051/laundryWala/items/fligrktjuzulrtcfdvav.png",
     "quantity": 0,
+  },
+];
+
+var offerNMore = [
+  {
+    "headline": "Laundry in Progress",
+    "subHeader": "You can see \nin various stages",
+  },
+  {
+    "headline": "30% OFF",
+    "subHeader": "USE KAPOR30 TO \n GET 30% DISCOUNT",
   },
 ];

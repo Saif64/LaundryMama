@@ -43,7 +43,7 @@ class HorizBox extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isCurrent
-                      ? Color.fromARGB(255, 32, 123, 148)
+                      ? Colors.amber[900]
                       : Color.fromARGB(255, 196, 192, 192),
                   enableFeedback: true,
                   elevation: 0,

@@ -7,10 +7,12 @@ class Head6 extends StatelessWidget {
     required this.text,
     this.color,
     this.fontWeight = FontWeight.w300,
+    this.decoration,
   });
   final String text;
   final Color? color;
   final FontWeight? fontWeight;
+  final TextDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class Head6 extends StatelessWidget {
         fontSize: 13,
         color: color,
         fontWeight: fontWeight,
+        decoration: decoration,
       ),
     );
   }

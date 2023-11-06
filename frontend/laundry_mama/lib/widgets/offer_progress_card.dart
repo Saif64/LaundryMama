@@ -41,38 +41,46 @@ class OfferProgressCard extends StatelessWidget {
           color: backgroundColor,
         ),
         child: Padding(
-            padding: EdgeInsets.symmetric(vertical: height * 0.012),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: width * 0.012),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Head5(text: headline),
-                      Head6(text: subHeader),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Head4(
-                          text: 'Check Now!',
-                          color: Color.fromARGB(255, 212, 21, 8),
-                        ),
+          padding: EdgeInsets.symmetric(vertical: height * 0.012),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: width * 0.012),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Head5(text: headline),
+                    Head6(
+                      text: subHeader,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Head4(
+                        text: 'Check Now!',
+                        color: Colors.amber[400],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: height * 0.15,
-                  width: width * 0.3,
-                  child: Image.asset(
-                    offerImage,
-                    fit: BoxFit.contain,
-                  ),
-                )
-              ],
-            )),
+              ),
+              Container(
+                height: height * 0.15,
+                width: width * 0.3,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.amber[400],
+                ),
+                child: Image.asset(
+                  offerImage,
+                  fit: BoxFit.contain,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
