@@ -3,7 +3,7 @@ import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/pages/address_page.dart';
 import 'package:laundry_mama/pages/homepage.dart';
 import 'package:laundry_mama/pages/login_page.dart';
-import 'package:laundry_mama/pages/new_order.dart';
+import 'package:laundry_mama/pages/types_of_service.dart';
 import 'package:laundry_mama/pages/otp_page.dart';
 import 'package:laundry_mama/pages/signup_page.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             ),
         OTP_PAGE: (context) => OtpPage(),
         ADDRESS_PAGE: (context) => AdressPage(),
-        NEW_ORDER: (context) => NewOrder(),
+        NEW_ORDER: (context) => TypesOfService(),
       },
     );
   }

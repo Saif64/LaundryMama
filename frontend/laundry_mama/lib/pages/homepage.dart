@@ -62,7 +62,8 @@ class _HomePageState extends State<HomePage> {
                             'Start your \nlaundry by adding basket',
                         isCurrent: true,
                         containerWidth: width * 0.36,
-                        onPressed: () {},
+                        onPressed: () =>
+                            Navigator.pushNamed(context, NEW_ORDER),
                       ),
                       HorizBox(
                         buttonText: 'Reivew',

@@ -7,14 +7,14 @@ import 'package:laundry_mama/widgets/head5.dart';
 
 import 'package:laundry_mama/widgets/medium_button.dart';
 
-class NewOrder extends StatefulWidget {
-  const NewOrder({super.key});
+class TypesOfService extends StatefulWidget {
+  const TypesOfService({super.key});
 
   @override
-  State<NewOrder> createState() => _NewOrderState();
+  State<TypesOfService> createState() => _TypesOfServiceState();
 }
 
-class _NewOrderState extends State<NewOrder> {
+class _TypesOfServiceState extends State<TypesOfService> {
   bool isSelectd = false;
   int _selectedIndex = -1;
 
@@ -66,7 +66,7 @@ class _NewOrderState extends State<NewOrder> {
                         ),
                         child: ListTile(
                           title: AutoSizeText(services[index]),
-                          selectedColor: Theme.of(context).shadowColor,
+                          selectedColor: Colors.amber[900],
                           trailing: Icon(
                             index == _selectedIndex
                                 ? Icons.check
