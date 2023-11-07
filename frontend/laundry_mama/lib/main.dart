@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/pages/address_page.dart';
+import 'package:laundry_mama/pages/cart_page.dart';
 import 'package:laundry_mama/pages/homepage.dart';
+import 'package:laundry_mama/pages/in_progress.dart';
 import 'package:laundry_mama/pages/login_page.dart';
+import 'package:laundry_mama/pages/profile_page.dart';
 import 'package:laundry_mama/pages/quantity_page.dart';
 import 'package:laundry_mama/pages/time_slot_page.dart';
 import 'package:laundry_mama/pages/types_of_service.dart';
@@ -36,7 +39,10 @@ class MyApp extends StatelessWidget {
         ADDRESS_PAGE: (context) => AdressPage(),
         NEW_ORDER: (context) => TypesOfService(),
         TIME_SLOT_PAGE: (context) => TimeSlotPage(),
-        QUANTITY_PAGE: (context) => QuantityPage()
+        QUANTITY_PAGE: (context) => QuantityPage(),
+        PROFILE_PAGE: (context) => ProfilePage(),
+        CART_PAGE: (context) => CartPage(),
+        IN_PROGRESS: (context) => InProgress()
       },
     );
   }

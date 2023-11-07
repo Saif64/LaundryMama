@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 List<Map<String, dynamic>> items = [
   {
     "id": 1,
@@ -51,3 +53,37 @@ var offerNMore = [
     "subHeader": "USE KAPOR30 TO \n GET 30% DISCOUNT",
   },
 ];
+
+var priceChart = [
+  'Wash + Iron combo: 3 T-Shirt + 3 Pants ➜ BDT-199',
+  'Iron Only: 2 Shirt + 3 T-Shirt + 3 Pants ➜ BDT-105',
+  'Iron Only: 2 Pajama + 2 Panjabi + 2 T-Shirt ➜ BDT-75',
+  'Regular Wash: 3 Shirt + 3 Pants ➜ BDT-130',
+];
+
+var accountInfo = [
+  {"headline": "Name", "info": "Muntasir Mahmud Saif"},
+  {"headline": "Email", "info": "saifmahmud81@gmail.com"},
+  {"headline": "Phone Number", "info": "+8801761264426"},
+];
+
+var address = [
+  {
+    'heading': 'home',
+    'location': 'Dhanmondi 8/A, Dhaka-1209',
+    'icon': const Icon(Icons.home_rounded)
+  },
+  {
+    'heading': 'office',
+    'location': 'Dhanmondi 27, Dhaka-1209',
+    'icon': const Icon(Icons.home_work_rounded)
+  },
+  {
+    'heading': 'other',
+    'location': 'Dhanmondi 5, Dhaka-1209',
+    'icon': const Icon(Icons.edit_location)
+  },
+];
+
+int totalQuantity = 6;
+int deliveryFee = 30;

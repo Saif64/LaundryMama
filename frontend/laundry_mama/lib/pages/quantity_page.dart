@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
+import 'package:laundry_mama/widgets/head6.dart';
 import 'package:laundry_mama/widgets/round_button.dart';
 
 import '../widgets/head4.dart';
@@ -17,13 +18,14 @@ class QuantityPage extends StatefulWidget {
 }
 
 class _QuantityPageState extends State<QuantityPage> {
-  int totalQuantity = 0;
+  // int totalQuantity = 0;
   var selectedIndex = -1;
 
   @override
   void initState() {
     super.initState();
     calculateTotalQuantity();
+    // print(totalQuantity);
   }
 
   void calculateTotalQuantity() {
@@ -121,23 +123,37 @@ class _QuantityPageState extends State<QuantityPage> {
                   },
                 ),
               ),
-              const Column(
+              Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Head5(text: 'Delivery Fee:', fontWeight: FontWeight.w400),
-                      Head5(
-                        text: 'BDT 30',
-                        fontWeight: FontWeight.w400,
+                      const Head6(
+                          text: 'Total Items: ', fontWeight: FontWeight.w600),
+                      Head6(
+                        text: 'X ${totalQuantity.toString()}',
+                        fontWeight: FontWeight.w600,
                       ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Head4(text: 'Total price:'),
-                      Head4(text: 'BDT 240')
+                      const Head6(
+                          text: 'Delivery Fee:', fontWeight: FontWeight.w600),
+                      Head6(
+                        text: '৳ $deliveryFee',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Head4(
+                        text: 'Total price:',
+                      ),
+                      Head4(text: '৳ ${(totalQuantity * 15) + deliveryFee}')
                     ],
                   )
                 ],

@@ -1,7 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/widgets/head5.dart';
+import 'package:laundry_mama/widgets/head6.dart';
 
 class PriceChart extends StatelessWidget {
   const PriceChart({
@@ -19,7 +20,7 @@ class PriceChart extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: height * 0.25,
+          height: height * 0.28,
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 41, 47, 57),
             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -31,7 +32,7 @@ class PriceChart extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Head5(
-                  text: 'Regular Iron + Wash',
+                  text: 'Our Featured Services',
                   color: Colors.white,
                 ),
                 Gap(height * 0.018),
@@ -41,13 +42,13 @@ class PriceChart extends StatelessWidget {
                     itemCount: 4,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(vertical: height * 0.01),
-                        child: const AutoSizeText(
-                          'Upto weight 4.5kg ➜ 220BDT - 330BDT',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, color: Colors.white),
-                        ),
-                      );
+                          padding:
+                              EdgeInsets.symmetric(vertical: height * 0.01),
+                          child: Head6(
+                            text: priceChart[index],
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ));
                     },
                   ),
                 ),
@@ -60,7 +61,7 @@ class PriceChart extends StatelessWidget {
           right: 10,
           child: Icon(
             Icons.shopping_basket_outlined,
-            size: MediaQuery.of(context).size.width * 0.15,
+            size: MediaQuery.of(context).size.width * 0.12,
             color: Colors.white,
           ),
         )

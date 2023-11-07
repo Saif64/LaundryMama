@@ -1,0 +1,169 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:laundry_mama/widgets/head6.dart';
+
+import '../dummy_data/dummy_data.dart';
+import '../widgets/head4.dart';
+import '../widgets/head5.dart';
+
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        toolbarHeight: height * 0.032,
+        title: const Head5(text: "Your Orders"),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.065),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(height * 0.02),
+              const Head4(text: 'Your Digital Recipt'),
+              Gap(height * 0.02),
+              const Head5(
+                text: 'Here are the list of services you have ordered from us',
+                fontWeight: FontWeight.w400,
+              ),
+              Gap(height * 0.03),
+              SizedBox(
+                height: height * 0.5,
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: height * 0.008),
+                      child: ListTile(
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Colors.grey,
+                          ),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        title: AutoSizeText(
+                          items[index]["item"].toString(),
+                          style: GoogleFonts.nunito(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 18,
+                          ),
+                        ),
+                        subtitle: AutoSizeText(
+                          items[index]["price"].toString(),
+                        ),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.network(
+                            items[index]["url"].toString(),
+                          ),
+                        ),
+                        trailing: Head5(
+                          text: items[index]['quantity'].toString(),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Gap(height * 0.03),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Head6(
+                          text: 'Total Item:', fontWeight: FontWeight.w400),
+                      Head6(
+                        text: 'X $totalQuantity',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Head6(
+                          text: 'SubTotal', fontWeight: FontWeight.w400),
+                      Head6(
+                        text: '৳ ${totalQuantity * 15}',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Head6(
+                          text: 'Delivery Fee:', fontWeight: FontWeight.w400),
+                      Head6(
+                        text: '৳ $deliveryFee',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  ),
+                  Gap(height * 0.07),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Head5(
+                          text:
+                              'Total Price: ৳${(totalQuantity * 15) + deliveryFee}'),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 60, 4, 157),
+                          shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: height * 0.01),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.shopping_basket_outlined,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              Gap(width * 0.02),
+                              AutoSizeText(
+                                'Checkout',
+                                style: GoogleFonts.aBeeZee(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

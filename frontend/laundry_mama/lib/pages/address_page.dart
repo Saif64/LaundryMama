@@ -1,7 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:laundry_mama/widgets/locations.dart';
+import 'package:laundry_mama/dummy_data/dummy_data.dart';
+import 'package:laundry_mama/widgets/head5.dart';
+import 'package:laundry_mama/widgets/head6.dart';
+
 import 'package:laundry_mama/widgets/long_button.dart';
 
 class AdressPage extends StatefulWidget {
@@ -55,9 +58,16 @@ class _AdressPageState extends State<AdressPage> {
           Gap(height * 0.03),
           Expanded(
             child: ListView.builder(
-              itemCount: 4,
+              itemCount: address.length,
               itemBuilder: (BuildContext context, int index) {
-                return const LocationTiles();
+                return ListTile(
+                  title: Head5(text: address[index]['heading'].toString()),
+                  subtitle: Head6(
+                    text: address[index]['location'].toString(),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  leading: address[index]['icon'] as Icon,
+                );
               },
             ),
           ),

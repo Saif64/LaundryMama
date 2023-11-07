@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laundry_mama/global/routes.dart';
 
 import 'package:laundry_mama/widgets/head4.dart';
 import 'package:laundry_mama/widgets/head5.dart';
@@ -57,7 +58,7 @@ class OfferProgressCard extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(context, IN_PROGRESS),
                       child: Head4(
                         text: 'Check Now!',
                         color: Colors.amber[400],

@@ -129,6 +129,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   AppBar homepageAppbar(BuildContext context, double width) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return AppBar(
       elevation: 0,
       surfaceTintColor: Colors.transparent,
@@ -158,29 +160,55 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(context, CART_PAGE),
           child: Padding(
             padding: EdgeInsets.all(width * 0.015),
-            child: CircleAvatar(
-              maxRadius: width * 0.05,
-              minRadius: width * 0.03,
-              backgroundColor: Colors.red,
-              child: const Icon(
-                Icons.shopping_basket_outlined,
-                color: Colors.white,
+            child: Stack(children: [
+              CircleAvatar(
+                maxRadius: width * 0.05,
+                minRadius: width * 0.03,
+                backgroundColor: Colors.red,
+                child: const Icon(
+                  Icons.shopping_basket_outlined,
+                  color: Colors.white,
+                ),
               ),
-            ),
+              Positioned(
+                left: 0,
+                bottom: -14,
+                child: Container(
+                  width: width * 0.05,
+                  height: height * 0.05,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(230, 218, 198, 198),
+                  ),
+                  child: Center(
+                    child: AutoSizeText(
+                      totalQuantity.toString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ]),
           ),
         ),
         GestureDetector(
-          onTap: toSignupPage,
+          onTap: () => Navigator.pushNamed(context, PROFILE_PAGE),
           child: Padding(
             padding: EdgeInsets.all(width * 0.015),
-            child: CircleAvatar(
-              maxRadius: width * 0.05,
-              minRadius: width * 0.03,
-              backgroundImage:
-                  const AssetImage('assets/images/professional image.jpeg'),
+            child: Hero(
+              tag: 'profile-pic',
+              child: CircleAvatar(
+                maxRadius: width * 0.05,
+                minRadius: width * 0.03,
+                backgroundImage:
+                    const AssetImage('assets/images/professional image.jpeg'),
+              ),
             ),
           ),
         ),
