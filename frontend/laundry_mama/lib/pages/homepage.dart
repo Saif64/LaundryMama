@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
+
 import 'package:laundry_mama/widgets/box_hor.dart';
 import 'package:laundry_mama/widgets/head6.dart';
 import 'package:laundry_mama/widgets/offer_progress_card.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/cart_model.dart';
 import '../widgets/head4.dart';
 import '../widgets/price_chart.dart';
 
@@ -184,13 +187,16 @@ class _HomePageState extends State<HomePage> {
                     color: Color.fromARGB(230, 218, 198, 198),
                   ),
                   child: Center(
-                    child: AutoSizeText(
-                      totalQuantity.toString(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                    ),
+                    child:
+                        Consumer<CartProvider>(builder: (context, cart, child) {
+                      return AutoSizeText(
+                        cart.totalQuantity.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      );
+                    }),
                   ),
                 ),
               )

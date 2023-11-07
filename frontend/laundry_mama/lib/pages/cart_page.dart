@@ -2,9 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:laundry_mama/widgets/head6.dart';
+import 'package:provider/provider.dart';
 
 import '../dummy_data/dummy_data.dart';
+import '../providers/cart_model.dart';
 import '../widgets/head4.dart';
 import '../widgets/head5.dart';
 
@@ -90,10 +93,12 @@ class _CartPageState extends State<CartPage> {
                     children: [
                       const Head6(
                           text: 'Total Item:', fontWeight: FontWeight.w400),
-                      Head6(
-                        text: 'X $totalQuantity',
-                        fontWeight: FontWeight.w400,
-                      ),
+                      Consumer<CartProvider>(builder: (context, cart, child) {
+                        return Head6(
+                          text: 'X ${cart.totalQuantity}',
+                          fontWeight: FontWeight.w400,
+                        );
+                      }),
                     ],
                   ),
                   Row(
@@ -101,10 +106,12 @@ class _CartPageState extends State<CartPage> {
                     children: [
                       const Head6(
                           text: 'SubTotal', fontWeight: FontWeight.w400),
-                      Head6(
-                        text: '৳ ${totalQuantity * 15}',
-                        fontWeight: FontWeight.w400,
-                      ),
+                      Consumer<CartProvider>(builder: (context, cart, child) {
+                        return Head6(
+                          text: '৳ ${cart.totalQuantity * 15}',
+                          fontWeight: FontWeight.w400,
+                        );
+                      }),
                     ],
                   ),
                   Row(
@@ -122,9 +129,11 @@ class _CartPageState extends State<CartPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Head5(
-                          text:
-                              'Total Price: ৳${(totalQuantity * 15) + deliveryFee}'),
+                      Consumer<CartProvider>(builder: (context, cart, child) {
+                        return Head5(
+                            text:
+                                'Total Price: ৳${(cart.totalQuantity * 15) + deliveryFee}');
+                      }),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(

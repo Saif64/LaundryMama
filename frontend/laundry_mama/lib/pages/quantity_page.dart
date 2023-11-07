@@ -4,8 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
+
 import 'package:laundry_mama/widgets/head6.dart';
 import 'package:laundry_mama/widgets/round_button.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/cart_model.dart';
 
 import '../widgets/head4.dart';
 import '../widgets/head5.dart';
@@ -29,11 +33,13 @@ class _QuantityPageState extends State<QuantityPage> {
   }
 
   void calculateTotalQuantity() {
+    final cart = Provider.of<CartProvider>(context, listen: false);
     int total = 0;
     for (var item in items) {
       total += (item['quantity'] as int);
     }
-    totalQuantity = total;
+
+    cart.updateTotalQuantity(totalQuantity = total);
   }
 
   @override
@@ -69,56 +75,62 @@ class _QuantityPageState extends State<QuantityPage> {
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: EdgeInsets.symmetric(vertical: height * 0.008),
-                      child: ListTile(
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: Colors.grey,
+                      child: Consumer(builder: (
+                        context,
+                        cart,
+                        child,
+                      ) {
+                        return ListTile(
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        title: AutoSizeText(
-                          items[index]["item"].toString(),
-                          style: GoogleFonts.nunito(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 18,
+                          title: AutoSizeText(
+                            items[index]["item"].toString(),
+                            style: GoogleFonts.nunito(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                        subtitle: AutoSizeText(
-                          items[index]["price"].toString(),
-                        ),
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            items[index]["url"].toString(),
+                          subtitle: AutoSizeText(
+                            items[index]["price"].toString(),
                           ),
-                        ),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove),
-                              onPressed: () {
-                                if (items[index]['quantity'] > 0) {
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.network(
+                              items[index]["url"].toString(),
+                            ),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  if (items[index]['quantity'] > 0) {
+                                    setState(() {
+                                      items[index]['quantity']--;
+                                      calculateTotalQuantity();
+                                    });
+                                  }
+                                },
+                              ),
+                              Text(items[index]['quantity'].toString()),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
                                   setState(() {
-                                    items[index]['quantity']--;
+                                    items[index]['quantity']++;
                                     calculateTotalQuantity();
                                   });
-                                }
-                              },
-                            ),
-                            Text(items[index]['quantity'].toString()),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () {
-                                setState(() {
-                                  items[index]['quantity']++;
-                                  calculateTotalQuantity();
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
                     );
                   },
                 ),

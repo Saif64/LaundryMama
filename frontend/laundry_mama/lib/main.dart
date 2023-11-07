@@ -11,9 +11,17 @@ import 'package:laundry_mama/pages/time_slot_page.dart';
 import 'package:laundry_mama/pages/types_of_service.dart';
 import 'package:laundry_mama/pages/otp_page.dart';
 import 'package:laundry_mama/pages/signup_page.dart';
+import 'package:provider/provider.dart';
+
+import 'providers/cart_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: HOMEPAGE,
       routes: {
-        HOMEPAGE: (context) => HomePage(),
+        HOMEPAGE: (context) => const HomePage(),
         SIGNUP_PAGE: (context) => SignupPage(
               onTap: () =>
                   Navigator.of(context).pushReplacementNamed(LOGIN_PAGE),
@@ -35,14 +43,14 @@ class MyApp extends StatelessWidget {
         LOGIN_PAGE: (context) => LoginPage(
               onTap: () => Navigator.pushReplacementNamed(context, SIGNUP_PAGE),
             ),
-        OTP_PAGE: (context) => OtpPage(),
-        ADDRESS_PAGE: (context) => AdressPage(),
-        NEW_ORDER: (context) => TypesOfService(),
-        TIME_SLOT_PAGE: (context) => TimeSlotPage(),
-        QUANTITY_PAGE: (context) => QuantityPage(),
-        PROFILE_PAGE: (context) => ProfilePage(),
-        CART_PAGE: (context) => CartPage(),
-        IN_PROGRESS: (context) => InProgress()
+        OTP_PAGE: (context) => const OtpPage(),
+        ADDRESS_PAGE: (context) => const AdressPage(),
+        NEW_ORDER: (context) => const TypesOfService(),
+        TIME_SLOT_PAGE: (context) => const TimeSlotPage(),
+        QUANTITY_PAGE: (context) => const QuantityPage(),
+        PROFILE_PAGE: (context) => const ProfilePage(),
+        CART_PAGE: (context) => const CartPage(),
+        IN_PROGRESS: (context) => const InProgress()
       },
     );
   }
