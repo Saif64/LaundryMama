@@ -1,18 +1,19 @@
 import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
-import 'package:laundry_mama/global/routes.dart';
 
-import 'package:laundry_mama/widgets/head6.dart';
-import 'package:laundry_mama/widgets/round_button.dart';
 import 'package:provider/provider.dart';
 
+import '../global/routes.dart';
 import '../providers/cart_model.dart';
 
 import '../widgets/head4.dart';
 import '../widgets/head5.dart';
+import '../widgets/head6.dart';
+import '../widgets/round_button.dart';
 
 class QuantityPage extends StatefulWidget {
   const QuantityPage({super.key});
@@ -171,47 +172,17 @@ class _QuantityPageState extends State<QuantityPage> {
                 ],
               ),
               Gap(height * 0.03),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      RoundButton(
-                        onTap: () =>
-                            Navigator.pushNamed(context, TIME_SLOT_PAGE),
-                        icon: const Icon(
-                          Icons.date_range_rounded,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Gap(height * 0.007),
-                      const Head5(
-                        text: 'PICK TIME SLOT',
-                        fontWeight: FontWeight.w400,
-                      )
-                    ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: RoundButton(
+                  onTap: () => Navigator.pushNamed(context, TIME_SLOT_PAGE),
+                  icon: const Icon(
+                    Icons.arrow_right_alt_rounded,
+                    size: 30,
+                    color: Colors.white,
                   ),
-                  Column(
-                    children: [
-                      RoundButton(
-                        onTap: () {},
-                        icon: const Icon(
-                          Icons.add_shopping_cart_rounded,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Gap(height * 0.007),
-                      const Head5(
-                        text: 'ADD TO CART',
-                        fontWeight: FontWeight.w400,
-                      )
-                    ],
-                  ),
-                ],
+                ),
               ),
-              Gap(height * 0.07),
             ],
           ),
         ),

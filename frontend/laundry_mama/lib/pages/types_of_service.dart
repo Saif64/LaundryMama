@@ -89,8 +89,8 @@ class _TypesOfServiceState extends State<TypesOfService> {
                 alignment: Alignment.center,
                 child: RoundButton(
                   onTap: () => Navigator.pushNamed(context, QUANTITY_PAGE),
-                  icon: Icon(
-                    Icons.keyboard_arrow_right_rounded,
+                  icon: const Icon(
+                    Icons.arrow_right_alt_rounded,
                     size: 35,
                     color: Colors.white,
                   ),
