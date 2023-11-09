@@ -54,12 +54,32 @@ var offerNMore = [
   },
 ];
 
-var priceChart = [
-  'Wash + Iron combo: 3 T-Shirt + 3 Pants ➜ BDT-199',
-  'Iron Only: 2 Shirt + 3 T-Shirt + 3 Pants ➜ BDT-105',
-  'Iron Only: 2 Pajama + 2 Panjabi + 2 T-Shirt ➜ BDT-75',
-  'Regular Wash: 3 Shirt + 3 Pants ➜ BDT-130',
+// var priceChart = [
+//   'Wash + Iron combo: 3 T-Shirt + 3 Pants ➜ BDT-199',
+//   'Iron Only: 2 Shirt + 3 T-Shirt + 3 Pants ➜ BDT-105',
+//   'Iron Only: 2 Pajama + 2 Panjabi + 2 T-Shirt ➜ BDT-75',
+//   'Regular Wash: 3 Shirt + 3 Pants ➜ BDT-130',
+// ];
+
+var featuredService = [
+  {
+    "heading": "20TK OFF",
+    "subHeading": "20TK OFF for 6 shirts",
+    "imageUrl": "assets/images/shirts.jpeg"
+  },
+  {
+    "heading": "50TK OFF",
+    "subHeading": "50TK OFF on formal drycleaning",
+    "imageUrl": "assets/images/formal2.webp"
+  },
+  {
+    "heading": "40TK OFF",
+    "subHeading": "40TK OFF on shirt Wash+Iron",
+    "imageUrl": "assets/images/shirt2.jpeg"
+  },
 ];
+
+var offerImage = ['assets/images/bag.png', 'assets/images/clothes.png'];
 
 var accountInfo = [
   {"headline": "Name", "info": "Muntasir Mahmud Saif"},

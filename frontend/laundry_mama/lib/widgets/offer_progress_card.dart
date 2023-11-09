@@ -34,52 +34,52 @@ class OfferProgressCard extends StatelessWidget {
         right: width * 0.025,
         bottom: height * 0.019,
       ),
-      child: Container(
-        width: containerWidth,
-        decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(255, 84, 74, 74)),
-          borderRadius: BorderRadius.circular(10),
-          color: backgroundColor,
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: height * 0.012),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: width * 0.012),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Head5(text: headline),
-                    Head6(
-                      text: subHeader,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, IN_PROGRESS),
-                      child: Head4(
+      child: GestureDetector(
+        onTap: () => Navigator.pushNamed(context, IN_PROGRESS),
+        child: Container(
+          width: containerWidth,
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color.fromARGB(255, 84, 74, 74)),
+            borderRadius: BorderRadius.circular(10),
+            color: backgroundColor,
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: height * 0.012),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: width * 0.012),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Head5(text: headline),
+                      Head6(
+                        text: subHeader,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      Head4(
                         text: 'Check Now!',
                         color: Colors.amber[400],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                height: height * 0.15,
-                width: width * 0.3,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.amber[400],
-                ),
-                child: Image.asset(
-                  offerImage,
-                  fit: BoxFit.contain,
-                ),
-              )
-            ],
+                Container(
+                  height: height * 0.15,
+                  width: width * 0.3,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.amber[400],
+                  ),
+                  child: Image.asset(
+                    offerImage,
+                    fit: BoxFit.contain,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

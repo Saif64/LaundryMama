@@ -29,20 +29,20 @@ class _InProgressState extends State<InProgress> {
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         toolbarHeight: height * 0.05,
+        automaticallyImplyLeading: false,
         title: const Head4(
           text: 'Order In Progress',
         ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).popUntil((route) => route.isFirst);
-                Navigator.pushReplacementNamed(context, HOMEPAGE);
-              },
-              icon: Icon(
-                Icons.home_outlined,
-                size: height * 0.038,
-              ))
-        ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+            Navigator.pushReplacementNamed(context, HOMEPAGE);
+          },
+          icon: Icon(
+            Icons.home_outlined,
+            size: height * 0.038,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -130,6 +130,9 @@ class _InProgressState extends State<InProgress> {
                   ],
                 ),
                 Gap(height * 0.03),
+                const Head4(
+                  text: 'Discounted Services',
+                ),
                 SizedBox(
                   height: height * 0.2,
                   child: ListView.builder(
@@ -141,6 +144,7 @@ class _InProgressState extends State<InProgress> {
                         headline: '30TK OFF',
                         subHeader: 'USE KAPOR30 TO \nGET 30 TAKA DISCOUNT',
                         backgroundColor: const Color.fromARGB(255, 0, 129, 189),
+                        offerImage: offerImage[index],
                       );
                     },
                   ),

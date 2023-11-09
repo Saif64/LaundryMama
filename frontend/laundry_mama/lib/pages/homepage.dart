@@ -6,13 +6,14 @@ import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
 
 import 'package:laundry_mama/widgets/box_hor.dart';
+
 import 'package:laundry_mama/widgets/head6.dart';
 import 'package:laundry_mama/widgets/offer_progress_card.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/cart_model.dart';
 import '../widgets/head4.dart';
-import '../widgets/price_chart.dart';
+import '../widgets/featured_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -101,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                       headline: offerNMore[index]["headline"].toString(),
                       subHeader: offerNMore[index]['subHeader'].toString(),
                       backgroundColor: const Color.fromARGB(255, 0, 129, 189),
+                      offerImage: offerImage[index],
                     );
                   },
                 ),
@@ -122,7 +124,23 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Gap(height * 0.018),
-              PriceChart(height: height, width: width),
+              SizedBox(
+                height: height * 0.4,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: featuredService.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var service = featuredService[index];
+                    return FeaturedServiceCard(
+                      height: height * 0.2,
+                      width: width * 0.6,
+                      imageUrl: service['imageUrl'].toString(),
+                      offerHeading: service['heading'].toString(),
+                      offerSubHeading: service['subHeading'].toString(),
+                    );
+                  },
+                ),
+              ),
               Gap(height * 0.03),
             ],
           ),
