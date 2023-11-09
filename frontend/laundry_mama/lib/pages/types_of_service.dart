@@ -38,7 +38,7 @@ class _TypesOfServiceState extends State<TypesOfService> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.065),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.055),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

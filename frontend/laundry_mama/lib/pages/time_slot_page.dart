@@ -4,6 +4,7 @@ import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/head4.dart';
 
@@ -23,7 +24,10 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
     setState(() {
       _time = newTime;
     });
-    Navigator.pushReplacementNamed(context, CART_PAGE);
+    Navigator.pushReplacementNamed(context, CART_PAGE, arguments: {
+      'time': _time.format(context),
+      'date': DateFormat('EEE d MMM, y').format(_selectedDate)
+    });
   }
 
   @override
@@ -41,13 +45,12 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 0.065),
+            padding: EdgeInsets.symmetric(horizontal: width * 0.055),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Head4(text: 'Choose when You\'d like to call the rider'),
-                Gap(height * 0.02),
-                Gap(height * 0.03),
+                Gap(height * 0.05),
                 SizedBox(
                   height: height * 0.1,
                   child: DatePicker(

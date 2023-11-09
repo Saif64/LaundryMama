@@ -27,6 +27,12 @@ class _CartPageState extends State<CartPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
+    final Map<String, dynamic> args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    final time = args['time'];
+    final date = args['date'];
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -36,15 +42,16 @@ class _CartPageState extends State<CartPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.065),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.055),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(height * 0.02),
               const Head4(text: 'Your Digital Recipt'),
               Gap(height * 0.02),
-              const Head5(
-                text: 'Here are the list of services you have ordered from us',
+              Head5(
+                text:
+                    'Your pickup request for $date at $time has been received!',
                 fontWeight: FontWeight.w400,
               ),
               Gap(height * 0.03),
