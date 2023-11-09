@@ -64,12 +64,13 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
           child: Column(
             children: [
               ColorFiltered(
-                colorFilter:
-                    ColorFilter.mode(Colors.deepPurple, BlendMode.srcATop),
+                colorFilter: const ColorFilter.mode(
+                    Colors.deepPurple, BlendMode.srcATop),
                 child: Lottie.asset(
                   'assets/animations/login_animation.json',
                   height: height * 0.27,
                   reverse: true,
+                  frameRate: FrameRate.max,
                 ),
               ),
               Padding(

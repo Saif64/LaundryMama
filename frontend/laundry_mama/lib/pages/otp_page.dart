@@ -30,6 +30,7 @@ class _OtpPageState extends State<OtpPage> {
           Lottie.asset(
             'assets/animations/otp.json',
             height: height * 0.27,
+            frameRate: FrameRate.max,
           ),
           SizedBox(
             height: height * 0.03,

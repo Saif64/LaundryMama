@@ -112,6 +112,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 'assets/animations/register.json',
                 controller: _registerAnimationController,
                 height: height * 0.2,
+                frameRate: FrameRate.max,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(

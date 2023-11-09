@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Head4(
-                    text: 'Price Chart',
+                    text: 'Featured Services',
                   ),
                   GestureDetector(
                     onTap: () {},
