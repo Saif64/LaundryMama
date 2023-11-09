@@ -19,6 +19,9 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  String selectedChip = '';
+  List<String> chipsOptions = ['Cash On Delivery', 'Bkash'];
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -85,7 +88,7 @@ class _CartPageState extends State<CartPage> {
                   },
                 ),
               ),
-              Gap(height * 0.03),
+              Gap(height * 0.01),
               Column(
                 children: [
                   Row(
@@ -125,48 +128,76 @@ class _CartPageState extends State<CartPage> {
                       ),
                     ],
                   ),
+                  Gap(height * 0.02),
+                  SizedBox(
+                    height: height * 0.06,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: chipsOptions.length - 1,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Wrap(
+                            spacing: 8.0,
+                            runSpacing: 8.0,
+                            children: chipsOptions.map((String option) {
+                              return ChoiceChip(
+                                label: Text(option),
+                                selected: selectedChip == option,
+                                onSelected: (bool selected) {
+                                  setState(() {
+                                    selectedChip = selected ? option : '';
+                                  });
+                                  print(selectedChip);
+                                },
+                              );
+                            }).toList());
+                      },
+                    ),
+                  ),
+                  Gap(height * 0.015),
+                  SafeArea(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Consumer<CartProvider>(builder: (context, cart, child) {
+                          return Head5(
+                              text:
+                                  'Total Price: ৳${(cart.totalQuantity * 15) + deliveryFee}');
+                        }),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 60, 4, 157),
+                            shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                          ),
+                          child: Padding(
+                            padding:
+                                EdgeInsets.symmetric(vertical: height * 0.01),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.shopping_basket_outlined,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                                Gap(width * 0.02),
+                                AutoSizeText(
+                                  'Checkout',
+                                  style: GoogleFonts.aBeeZee(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 18,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Gap(height * 0.07),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Consumer<CartProvider>(builder: (context, cart, child) {
-                        return Head5(
-                            text:
-                                'Total Price: ৳${(cart.totalQuantity * 15) + deliveryFee}');
-                      }),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 60, 4, 157),
-                          shape: ContinuousRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                        child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: height * 0.01),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.shopping_basket_outlined,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                              Gap(width * 0.02),
-                              AutoSizeText(
-                                'Checkout',
-                                style: GoogleFonts.aBeeZee(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  )
                 ],
               ),
             ],
