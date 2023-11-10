@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:laundry_mama/global/routes.dart';
 
 import 'package:laundry_mama/widgets/head6.dart';
 import 'package:provider/provider.dart';
@@ -171,7 +172,8 @@ class _CartPageState extends State<CartPage> {
                                   'Total Price: ৳${(cart.totalQuantity * 15) + deliveryFee}');
                         }),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.pushReplacementNamed(
+                              context, IN_PROGRESS),
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromARGB(255, 60, 4, 157),
