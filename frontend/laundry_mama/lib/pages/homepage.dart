@@ -188,10 +188,10 @@ class _HomePageState extends State<HomePage> {
               CircleAvatar(
                 maxRadius: width * 0.05,
                 minRadius: width * 0.03,
-                backgroundColor: Colors.red,
-                child: const Icon(
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                child: Icon(
                   Icons.shopping_basket_outlined,
-                  color: Colors.white,
+                  color: Colors.amber[900],
                 ),
               ),
               Positioned(
