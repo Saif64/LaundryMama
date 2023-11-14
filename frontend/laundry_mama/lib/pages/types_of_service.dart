@@ -15,8 +15,9 @@ class TypesOfService extends StatefulWidget {
 }
 
 class _TypesOfServiceState extends State<TypesOfService> {
-  bool isSelectd = false;
-  int _selectedIndex = -1;
+  // bool isSelectd = false;
+  // int _selectedIndex = -1;
+  List<int> selectedItems = [];
 
   var services = [
     'Regular Wash',
@@ -56,6 +57,8 @@ class _TypesOfServiceState extends State<TypesOfService> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: services.length,
                   itemBuilder: (BuildContext context, int index) {
+                    final isSelected = selectedItems.contains(index);
+
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: ListTile(
@@ -68,15 +71,17 @@ class _TypesOfServiceState extends State<TypesOfService> {
                         title: AutoSizeText(services[index]),
                         selectedColor: Colors.amber[900],
                         trailing: Icon(
-                          index == _selectedIndex
-                              ? Icons.check
-                              : Icons.circle_outlined,
+                          isSelected ? Icons.check : Icons.circle_outlined,
                           color: Colors.green,
                         ),
-                        selected: index == _selectedIndex,
+                        selected: isSelected,
                         onTap: () {
                           setState(() {
-                            _selectedIndex = index;
+                            if (isSelected) {
+                              selectedItems.remove(index);
+                            } else {
+                              selectedItems.add(index);
+                            }
                           });
                         },
                       ),
