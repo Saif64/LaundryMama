@@ -17,7 +17,7 @@ class TimeSlotPage extends StatefulWidget {
 
 class _TimeSlotPageState extends State<TimeSlotPage> {
   Time _time = Time.fromTimeOfDay(TimeOfDay.now(), 1);
-  bool iosStyle = false;
+  bool iosStyle = true;
   DateTime _selectedDate = DateTime.now();
 
   void onTimeChanged(Time newTime) {
@@ -36,16 +36,15 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        toolbarHeight: height * 0.05,
-        title: const Head4(text: 'Date & Time'),
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      //   toolbarHeight: height * 0.05,
+      // ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 0.055),
+            padding: EdgeInsets.symmetric(horizontal: width * 0.035),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -72,8 +71,9 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
                   elevation: 1,
                   value: _time,
                   onChange: onTimeChanged,
-                  minuteInterval: TimePickerInterval.FIVE,
+                  minuteInterval: TimePickerInterval.FIFTEEN,
                   iosStylePicker: iosStyle,
+                  showCancelButton: false,
                   minHour: 9,
                   maxHour: 21,
                   is24HrFormat: false,

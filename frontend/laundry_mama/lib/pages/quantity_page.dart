@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
+import 'package:laundry_mama/pages/time_slot_page.dart';
 
 import 'package:provider/provider.dart';
 
-import '../global/routes.dart';
 import '../providers/cart_model.dart';
 
 import '../widgets/head4.dart';
@@ -56,7 +56,7 @@ class _QuantityPageState extends State<QuantityPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.055),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.035),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -136,6 +136,7 @@ class _QuantityPageState extends State<QuantityPage> {
                   },
                 ),
               ),
+              Gap(height * 0.03),
               Column(
                 children: [
                   Row(
@@ -171,14 +172,25 @@ class _QuantityPageState extends State<QuantityPage> {
                   )
                 ],
               ),
-              Gap(height * 0.03),
+              Gap(height * 0.02),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: RoundButton(
-                  onTap: () => Navigator.pushNamed(context, TIME_SLOT_PAGE),
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.85,
+                          child: const TimeSlotPage(),
+                        );
+                      },
+                    );
+                  },
                   icon: const Icon(
-                    Icons.arrow_right_alt_rounded,
-                    size: 30,
+                    Icons.more_time_rounded,
+                    size: 25,
                     color: Colors.white,
                   ),
                 ),
