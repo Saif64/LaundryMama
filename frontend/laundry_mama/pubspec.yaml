@@ -50,6 +50,7 @@ dependencies:
   day_night_time_picker: ^1.3.0+1
   chips_choice: ^3.0.1
   flexi_chip: ^1.0.8
+  modal_bottom_sheet: ^2.1.2
 
 dev_dependencies:
   flutter_test:
