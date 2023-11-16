@@ -159,25 +159,27 @@ class _HomePageState extends State<HomePage> {
       centerTitle: false,
       title: TextButton(
         onPressed: toAdressPage,
-        child: Row(children: [
-          Icon(
-            Icons.location_on_outlined,
-            color: Colors.amber[900],
-          ),
-          Hero(
-            tag: 'address',
-            child: Material(
-              type: MaterialType.transparency,
-              child: AutoSizeText(
-                initialLocation,
-                style: TextStyle(
-                  color: Colors.amber[900],
-                  fontWeight: FontWeight.w700,
+        child: Row(
+          children: [
+            Icon(
+              Icons.location_on_outlined,
+              color: Colors.amber[900],
+            ),
+            Hero(
+              tag: 'address',
+              child: Material(
+                type: MaterialType.transparency,
+                child: AutoSizeText(
+                  initialLocation,
+                  style: TextStyle(
+                    color: Colors.amber[900],
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
       actions: [
         GestureDetector(
