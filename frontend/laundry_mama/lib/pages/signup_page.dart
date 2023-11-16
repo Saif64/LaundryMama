@@ -151,7 +151,7 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
               AuthInput(
                 controller: _phoneNumber,
                 hintText: 'Phone Number',
-                obscureText: true,
+                obscureText: false,
                 inputType: TextInputType.phone,
                 labelText: 'Phone Number',
               ).animate().shimmer(
