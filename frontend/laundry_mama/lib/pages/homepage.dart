@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
@@ -52,9 +53,15 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 24,
                   fontWeight: FontWeight.w300,
                 ),
-              ),
+              )
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveX(delay: const Duration(milliseconds: 30)),
               Gap(height * 0.015),
-              const Head4(text: 'Get your clothes done in \n3 simple steps'),
+              const Head4(text: 'Get your clothes done in \n3 simple steps')
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveX(delay: const Duration(milliseconds: 30)),
               Gap(height * 0.012),
               SizedBox(
                 height: height * 0.18,
@@ -70,27 +77,39 @@ class _HomePageState extends State<HomePage> {
                         containerWidth: width * 0.36,
                         onPressed: () =>
                             Navigator.pushNamed(context, NEW_ORDER),
-                      ),
+                      )
+                          .animate()
+                          .fadeIn(duration: const Duration(milliseconds: 325))
+                          .moveX(delay: const Duration(milliseconds: 30)),
                       HorizBox(
                         buttonText: 'Reivew',
                         descriptionText:
                             'Laundry in process... \nthanks for waiting',
                         isCurrent: false,
                         containerWidth: width * 0.42,
-                      ),
+                      )
+                          .animate()
+                          .fadeIn(duration: const Duration(milliseconds: 325))
+                          .moveX(delay: const Duration(milliseconds: 30)),
                       HorizBox(
                         buttonText: 'Reivew',
                         descriptionText: 'Out for delivery ',
                         isCurrent: false,
                         containerWidth: width * 0.42,
-                      ),
+                      )
+                          .animate()
+                          .fadeIn(duration: const Duration(milliseconds: 325))
+                          .moveX(delay: const Duration(milliseconds: 30)),
                     ],
                   ),
                 ),
               ),
               const Head4(
                 text: 'Offers & more',
-              ),
+              )
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveX(delay: const Duration(milliseconds: 30)),
               SizedBox(
                 height: height * 0.2,
                 child: ListView.builder(
@@ -103,7 +122,10 @@ class _HomePageState extends State<HomePage> {
                       subHeader: offerNMore[index]['subHeader'].toString(),
                       backgroundColor: const Color.fromARGB(255, 0, 129, 189),
                       offerImage: offerImage[index],
-                    );
+                    )
+                        .animate()
+                        .fadeIn(duration: const Duration(milliseconds: 325))
+                        .moveY(delay: const Duration(milliseconds: 30));
                   },
                 ),
               ),
@@ -112,7 +134,10 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Head4(
                     text: 'Featured Services',
-                  ),
+                  )
+                      .animate()
+                      .fadeIn(duration: const Duration(milliseconds: 325))
+                      .moveX(delay: const Duration(milliseconds: 150)),
                   GestureDetector(
                     onTap: () {},
                     child: const Head6(
@@ -137,7 +162,10 @@ class _HomePageState extends State<HomePage> {
                       imageUrl: service['imageUrl'].toString(),
                       offerHeading: service['heading'].toString(),
                       offerSubHeading: service['subHeading'].toString(),
-                    );
+                    )
+                        .animate()
+                        .fadeIn(duration: const Duration(milliseconds: 325))
+                        .moveY(delay: const Duration(milliseconds: 30));
                   },
                 ),
               ),

@@ -51,6 +51,7 @@ dependencies:
   chips_choice: ^3.0.1
   flexi_chip: ^1.0.8
   modal_bottom_sheet: ^2.1.2
+  flutter_map: ^6.0.1
 
 dev_dependencies:
   flutter_test:

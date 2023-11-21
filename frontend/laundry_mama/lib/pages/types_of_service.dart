@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/global/routes.dart';
@@ -44,12 +45,18 @@ class _TypesOfServiceState extends State<TypesOfService> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(height * 0.05),
-              const Head4(text: 'Let\'s proceed with your order'),
+              const Head4(text: 'Let\'s proceed with your order')
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveY(delay: const Duration(milliseconds: 30)),
               Gap(height * 0.02),
               const Head5(
                 text: 'Costumise what service you wish to \nhave from us',
                 fontWeight: FontWeight.w400,
-              ),
+              )
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveY(delay: const Duration(milliseconds: 30)),
               Gap(height * 0.05),
               SizedBox(
                 height: height * 0.4,
