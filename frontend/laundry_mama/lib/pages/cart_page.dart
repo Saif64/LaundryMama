@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry_mama/global/routes.dart';
@@ -48,12 +49,18 @@ class _CartPageState extends State<CartPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(height * 0.02),
-              const Head4(text: 'Your Digital Recipt'),
+              const Head4(text: 'Your Digital Recipt')
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveX(delay: const Duration(milliseconds: 30)),
               Gap(height * 0.02),
               const Head5(
                 text: 'Your pickup request has been received!',
                 fontWeight: FontWeight.w400,
-              ),
+              )
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveX(delay: const Duration(milliseconds: 30)),
               Gap(height * 0.03),
               SizedBox(
                 height: height * 0.5,
@@ -169,7 +176,10 @@ class _CartPageState extends State<CartPage> {
                           return Head5(
                               text:
                                   'Total Price: ৳${(cart.totalQuantity * 15) + deliveryFee}');
-                        }),
+                        })
+                            .animate()
+                            .fadeIn(duration: const Duration(milliseconds: 325))
+                            .moveY(delay: const Duration(milliseconds: 30)),
                         ElevatedButton(
                           onPressed: () => Navigator.pushReplacementNamed(
                               context, IN_PROGRESS),
@@ -197,11 +207,14 @@ class _CartPageState extends State<CartPage> {
                                       fontWeight: FontWeight.w800,
                                       fontSize: 18,
                                       color: Colors.white),
-                                ),
+                                )
                               ],
                             ),
                           ),
-                        ),
+                        )
+                            .animate()
+                            .fadeIn(duration: const Duration(milliseconds: 325))
+                            .moveX(delay: const Duration(milliseconds: 30)),
                       ],
                     ),
                   ),
