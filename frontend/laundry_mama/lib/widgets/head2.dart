@@ -8,10 +8,12 @@ class Head2 extends StatelessWidget {
       {super.key,
       required this.text,
       required this.fontSize,
-      required this.fontWeight});
+      required this.fontWeight,
+      this.color});
   final String text;
   final double fontSize;
   final FontWeight fontWeight;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class Head2 extends StatelessWidget {
       style: GoogleFonts.aBeeZee(
         fontSize: fontSize,
         fontWeight: fontWeight,
+        color: color,
       ),
     );
   }

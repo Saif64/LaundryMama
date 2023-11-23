@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gap/gap.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/auth_icons.dart';
 import 'package:laundry_mama/widgets/auth_page_input.dart';
@@ -96,172 +97,193 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        automaticallyImplyLeading: false,
-        toolbarHeight: 10,
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Lottie.asset(
-                'assets/animations/register.json',
-                controller: _registerAnimationController,
-                height: height * 0.2,
-                frameRate: FrameRate.max,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 36,
+      extendBodyBehindAppBar: true,
+      body: Container(
+        height: height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xfffc466b), Color(0xff817731)],
+            stops: [0.25, 0.75],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Gap(height * 0.07),
+
+                ColorFiltered(
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcATop,
+                  ),
+                  child: Lottie.asset(
+                    'assets/animations/register.json',
+                    controller: _registerAnimationController,
+                    height: height * 0.2,
+                    reverse: true,
+                    frameRate: FrameRate.max,
+                  ),
                 ),
-                child: const Head2(
-                        text: "Welcome to the new era of Laundry",
-                        fontSize: 30,
-                        fontWeight: FontWeight.w900)
-                    .animate()
-                    .fadeIn(duration: const Duration(milliseconds: 1200))
-                    .moveY(duration: const Duration(milliseconds: 565))
-                    .shakeX(
-                        duration: const Duration(milliseconds: 479),
-                        delay: const Duration(milliseconds: 250))
-                    .shimmer(
-                      delay: const Duration(milliseconds: 370),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 36,
+                  ),
+                  child: const Head2(
+                    text: "Welcome to the new era of Laundry",
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  )
+                      .animate()
+                      .fadeIn(duration: const Duration(milliseconds: 1200))
+                      .moveY(duration: const Duration(milliseconds: 565))
+                      .shakeX(
+                          duration: const Duration(milliseconds: 479),
+                          delay: const Duration(milliseconds: 250))
+                      .shimmer(
+                        delay: const Duration(milliseconds: 370),
+                      ),
+                ),
+                SizedBox(height: height * 0.035),
+
+                // username textfield
+                AuthInput(
+                  controller: _emailController,
+                  hintText: 'Email or Username',
+                  obscureText: false,
+                  inputType: TextInputType.emailAddress,
+                  labelText: 'Email or Username',
+                  validator: validateEmail,
+                ).animate().shimmer(
+                      duration: const Duration(milliseconds: 875),
                     ),
-              ),
-              SizedBox(height: height * 0.035),
 
-              // username textfield
-              AuthInput(
-                controller: _emailController,
-                hintText: 'Email or Username',
-                obscureText: false,
-                inputType: TextInputType.emailAddress,
-                labelText: 'Email or Username',
-                validator: validateEmail,
-              ).animate().shimmer(
-                    duration: const Duration(milliseconds: 875),
+                SizedBox(height: height * 0.015),
+                // Phone Number textfield
+                AuthInput(
+                  controller: _phoneNumber,
+                  hintText: 'Phone Number',
+                  obscureText: false,
+                  inputType: TextInputType.phone,
+                  labelText: 'Phone Number',
+                ).animate().shimmer(
+                      duration: const Duration(milliseconds: 875),
+                    ),
+
+                SizedBox(height: height * 0.015),
+                // password textfield
+                AuthInput(
+                  controller: _passwordController,
+                  hintText: 'Password',
+                  obscureText: true,
+                  inputType: TextInputType.text,
+                  labelText: 'Password',
+                  validator: validatePassword,
+                ).animate().shimmer(
+                      duration: const Duration(milliseconds: 875),
+                    ),
+
+                SizedBox(height: height * 0.03),
+
+                // sign in button
+                // if (isAuthenticating) onClickLogin,
+                // if (isAuthenticating)
+                LongButton(
+                  onTap: registerUser,
+                  text: 'Create an account',
+                ),
+                SizedBox(height: height * 0.015),
+                // or continue with
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.07, vertical: height * 0.015),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          thickness: 3,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: AutoSizeText(
+                          'Or continue with',
+                          style: TextStyle(
+                            color: Colors.grey[300],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          thickness: 3,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                    ],
                   ),
+                ),
 
-              SizedBox(height: height * 0.015),
-              // Phone Number textfield
-              AuthInput(
-                controller: _phoneNumber,
-                hintText: 'Phone Number',
-                obscureText: false,
-                inputType: TextInputType.phone,
-                labelText: 'Phone Number',
-              ).animate().shimmer(
-                    duration: const Duration(milliseconds: 875),
-                  ),
-
-              SizedBox(height: height * 0.015),
-              // password textfield
-              AuthInput(
-                controller: _passwordController,
-                hintText: 'Password',
-                obscureText: true,
-                inputType: TextInputType.text,
-                labelText: 'Password',
-                validator: validatePassword,
-              ).animate().shimmer(
-                    duration: const Duration(milliseconds: 875),
-                  ),
-
-              SizedBox(height: height * 0.03),
-
-              // sign in button
-              // if (isAuthenticating) onClickLogin,
-              // if (isAuthenticating)
-              LongButton(
-                onTap: registerUser,
-                text: 'Create an account',
-              ),
-              SizedBox(height: height * 0.015),
-              // or continue with
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.07, vertical: height * 0.015),
-                child: Row(
+                SizedBox(height: height * 0.015),
+                // google + apple sign in buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 3,
-                        color: Colors.grey[400],
+                    // google button
+                    AuthIconButton(
+                      imagePath: 'assets/icons/google.png',
+                      onTap: () {},
+                    ).animate().shimmer(
+                          delay: const Duration(milliseconds: 1200),
+                          duration: const Duration(milliseconds: 875),
+                        ),
+
+                    SizedBox(width: width * 0.04),
+
+                    // apple button
+                    AuthIconButton(
+                      imagePath: 'assets/icons/apple.png',
+                      onTap: () {},
+                    ).animate().shimmer(
+                          delay: const Duration(milliseconds: 1200),
+                          duration: const Duration(milliseconds: 875),
+                        ),
+                  ],
+                ),
+
+                SizedBox(height: height * 0.035),
+
+                // not a member? register now
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const AutoSizeText(
+                      'Already a member?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        'Or continue with',
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 3,
-                        color: Colors.grey[400],
+                    SizedBox(width: width * 0.009),
+                    InkWell(
+                      onTap: widget.onTap,
+                      child: AutoSizeText(
+                        'Login instead',
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
-                ),
-              ),
-
-              SizedBox(height: height * 0.015),
-              // google + apple sign in buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // google button
-                  AuthIconButton(
-                    imagePath: 'assets/icons/google.png',
-                    onTap: () {},
-                  ).animate().shimmer(
-                        delay: const Duration(milliseconds: 1200),
-                        duration: const Duration(milliseconds: 875),
-                      ),
-
-                  SizedBox(width: width * 0.04),
-
-                  // apple button
-                  AuthIconButton(
-                    imagePath: 'assets/icons/apple.png',
-                    onTap: () {},
-                  ).animate().shimmer(
-                        delay: const Duration(milliseconds: 1200),
-                        duration: const Duration(milliseconds: 875),
-                      ),
-                ],
-              ),
-
-              SizedBox(height: height * 0.035),
-
-              // not a member? register now
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AutoSizeText(
-                    'Already a member?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(width: width * 0.009),
-                  InkWell(
-                    onTap: widget.onTap,
-                    child: const AutoSizeText(
-                      'Login instead',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
