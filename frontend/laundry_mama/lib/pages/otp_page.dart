@@ -48,7 +48,7 @@ class _OtpPageState extends State<OtpPage> {
                 height: height * 0.03,
               ),
               const AutoSizeText(
-                'Enter your 6 digit OTP to authenticate your number',
+                'Enter your 4 digit OTP to verify your number',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
