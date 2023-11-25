@@ -56,7 +56,7 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
                     .moveY(delay: const Duration(milliseconds: 30)),
                 Gap(height * 0.05),
                 SizedBox(
-                  height: height * 0.1,
+                  height: height * 0.12,
                   child: DatePicker(
                     DateTime.now(),
                     initialSelectedDate: DateTime.now(),
@@ -73,7 +73,7 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
                     .animate()
                     .fadeIn(duration: const Duration(milliseconds: 325))
                     .moveY(delay: const Duration(milliseconds: 30)),
-                Gap(height * 0.03),
+                Gap(height * 0.05),
                 showPicker(
                   context: context,
                   borderRadius: 50,
@@ -82,7 +82,6 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
                   accentColor: Colors.green,
                   okText: "OKAY",
                   isInlinePicker: true,
-                  height: height * 0.9,
                   elevation: 0,
                   value: _time,
                   onChange: onTimeChanged,
