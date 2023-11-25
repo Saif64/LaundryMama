@@ -22,7 +22,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   // text editing controllers
   final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   bool isAuthenticating = false;
 
@@ -43,7 +42,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   void dispose() {
     _loginAnimationController.dispose();
     _phoneController.dispose();
-    _passwordController.dispose();
 
     super.dispose();
   }

@@ -48,7 +48,7 @@ class _OtpPageState extends State<OtpPage> {
                 height: height * 0.03,
               ),
               const AutoSizeText(
-                'Enter your 4 digit OTP to verify your number',
+                'Enter your 6 digit OTP to verify your number',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
@@ -59,12 +59,17 @@ class _OtpPageState extends State<OtpPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 0.05),
                 child: OTPTextField(
-                  length: 4,
+                  keyboardType: TextInputType.number,
+                  length: 6,
                   width: MediaQuery.of(context).size.width,
                   fieldStyle: FieldStyle.box,
                   textFieldAlignment: MainAxisAlignment.spaceAround,
+                  otpFieldStyle: OtpFieldStyle(
+                    focusBorderColor: Colors.white,
+                    enabledBorderColor: Colors.white,
+                  ),
                   outlineBorderRadius: 10,
-                  fieldWidth: width * 0.15,
+                  fieldWidth: width * 0.12,
                   contentPadding: const EdgeInsets.all(20),
                   isDense: true,
                   onCompleted: (value) {
