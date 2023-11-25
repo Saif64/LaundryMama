@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/global/routes.dart';
+import 'package:laundry_mama/widgets/head5.dart';
 import 'package:lottie/lottie.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -76,7 +77,9 @@ class _OtpPageState extends State<OtpPage> {
                   ),
                 ),
               ),
-              SizedBox(height: height * 0.02),
+              SizedBox(height: height * 0.05),
+              const Head5(text: "Haven't recieved code yet?"),
+              SizedBox(height: height * 0.01),
               TextButton(
                   onPressed: () {},
                   child: const AutoSizeText(

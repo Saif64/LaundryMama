@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   late final AnimationController _loginAnimationController;
 
   // text editing controllers
-  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool isAuthenticating = false;
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     _loginAnimationController.dispose();
-    _emailController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
 
     super.dispose();
@@ -95,31 +95,24 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         delay: const Duration(milliseconds: 370),
                       ),
                 ),
-                SizedBox(height: height * 0.035),
+                SizedBox(height: height * 0.065),
                 AuthInput(
-                  controller: _emailController,
-                  hintText: 'Email',
+                  controller: _phoneController,
+                  hintText: 'Phone Number',
                   obscureText: false,
-                  inputType: TextInputType.emailAddress,
-                  labelText: 'Email',
+                  inputType: TextInputType.phone,
+                  labelText: 'Phone Number',
                 ),
-                SizedBox(height: height * 0.015),
-                AuthInput(
-                  controller: _passwordController,
-                  hintText: 'Password',
-                  obscureText: true,
-                  inputType: TextInputType.visiblePassword,
-                  labelText: 'Password',
-                ),
-                SizedBox(height: height * 0.035),
+
+                SizedBox(height: height * 0.085),
                 LongButton(
                   onTap: () {
                     Navigator.of(context).popUntil((route) => route.isFirst);
-                    Navigator.pushReplacementNamed(context, HOMEPAGE);
+                    Navigator.pushReplacementNamed(context, OTP_PAGE);
                   },
-                  text: 'Continue the journey',
+                  text: "Let's wash clothes",
                 ),
-                SizedBox(height: height * 0.01),
+                SizedBox(height: height * 0.02),
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: width * 0.07, vertical: height * 0.015),
@@ -150,7 +143,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   ),
                 ),
 
-                SizedBox(height: height * 0.015),
+                SizedBox(height: height * 0.025),
                 // google + apple sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -177,32 +170,32 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   ],
                 ),
 
-                SizedBox(height: height * 0.035),
+                // SizedBox(height: height * 0.035),
 
                 // not a member? register now
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const AutoSizeText(
-                      'Not a member yet???',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(width: width * 0.009),
-                    InkWell(
-                      onTap: widget.onTap,
-                      child: AutoSizeText(
-                        'Let\'s register',
-                        style: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     const AutoSizeText(
+                //       'Not a member yet???',
+                //       style: TextStyle(
+                //         fontWeight: FontWeight.bold,
+                //         color: Colors.white,
+                //       ),
+                //     ),
+                //     SizedBox(width: width * 0.009),
+                //     InkWell(
+                //       onTap: widget.onTap,
+                //       child: AutoSizeText(
+                //         'Let\'s register',
+                //         style: TextStyle(
+                //           color: Colors.grey[400],
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
