@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   void toSignupPage() {
-    Navigator.pushNamed(context, SIGNUP_PAGE);
+    Navigator.pushNamed(context, REGISTER_USER);
   }
 
   void toAdressPage() {

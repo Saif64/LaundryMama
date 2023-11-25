@@ -10,15 +10,17 @@ import 'package:laundry_mama/widgets/head2.dart';
 import 'package:laundry_mama/widgets/long_button.dart';
 import 'package:lottie/lottie.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key, required this.onTap});
-  final Function()? onTap;
+class RegisterUser extends StatefulWidget {
+  const RegisterUser({
+    super.key,
+  });
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<RegisterUser> createState() => _RegisterUserState();
 }
 
-class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
+class _RegisterUserState extends State<RegisterUser>
+    with TickerProviderStateMixin {
   late final AnimationController _registerAnimationController;
 
   // text editing controllers
@@ -257,31 +259,6 @@ class _SignupPageState extends State<SignupPage> with TickerProviderStateMixin {
                 ),
 
                 SizedBox(height: height * 0.035),
-
-                // not a member? register now
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const AutoSizeText(
-                      'Already a member?',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(width: width * 0.009),
-                    InkWell(
-                      onTap: widget.onTap,
-                      child: AutoSizeText(
-                        'Login instead',
-                        style: TextStyle(
-                          color: Colors.grey[400],
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
