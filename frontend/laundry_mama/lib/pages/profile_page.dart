@@ -27,7 +27,9 @@ class _ProfilePageState extends State<ProfilePage> {
         toolbarHeight: height * 0.05,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(REGISTER_USER);
+            },
             icon: Icon(
               Icons.edit_note_rounded,
               size: width * 0.07,

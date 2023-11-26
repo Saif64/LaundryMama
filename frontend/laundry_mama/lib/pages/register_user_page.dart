@@ -1,14 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
-import 'package:laundry_mama/global/routes.dart';
-import 'package:laundry_mama/widgets/auth_icons.dart';
-import 'package:laundry_mama/widgets/auth_page_input.dart';
-import 'package:laundry_mama/widgets/head2.dart';
+import 'package:laundry_mama/widgets/input.dart';
 import 'package:laundry_mama/widgets/long_button.dart';
-import 'package:lottie/lottie.dart';
 
 class RegisterUser extends StatefulWidget {
   const RegisterUser({
@@ -21,249 +14,56 @@ class RegisterUser extends StatefulWidget {
 
 class _RegisterUserState extends State<RegisterUser>
     with TickerProviderStateMixin {
-  late final AnimationController _registerAnimationController;
+  var _nameController = TextEditingController();
+  var _emailController = TextEditingController();
 
-  // text editing controllers
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _phoneNumber = TextEditingController();
-
-  bool isAuthenticating = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _registerAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(
-        milliseconds: 2000,
-      ),
-    )..forward();
-  }
-
-  @override
-  void dispose() {
-    _registerAnimationController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _phoneNumber.dispose();
-    super.dispose();
-  }
-
-  // Functions
-  void registerUser() async {
-    setState(() {
-      isAuthenticating = true;
-    });
-    Navigator.pushReplacementNamed(context, OTP_PAGE);
-  }
-
-  String? validateEmail(String? value) {
-    const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
-        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
-        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
-        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
-        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
-        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
-        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
-    final regex = RegExp(pattern);
-
-    return value!.isNotEmpty && !regex.hasMatch(value)
-        ? 'Enter a valid email address'
-        : null;
-  }
-
-  String? validatePassword(String? value) {
-    RegExp regex =
-        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-
-    if (value!.isEmpty) {
-      return 'Please enter password';
-    } else {
-      if (!regex.hasMatch(value)) {
-        return 'Enter valid password';
-      } else {
-        return null;
-      }
-    }
-  }
-
-  final onClickLogin = const SpinKitFadingCube(
-    color: Colors.green,
-  );
-
-  // Build Methods & Widgets
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: Container(
-        height: height,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xfffc466b), Color(0xff817731)],
-            stops: [0.25, 0.75],
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-          ),
+    var _height = MediaQuery.of(context).size.height;
+    var _width = MediaQuery.of(context).size.width;
+    return Stack(
+      children: [
+        Image.asset(
+          "assets/images/gradient-background.jpeg",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
         ),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Gap(height * 0.07),
-
-                ColorFiltered(
-                  colorFilter: const ColorFilter.mode(
-                    Colors.white,
-                    BlendMode.srcATop,
-                  ),
-                  child: Lottie.asset(
-                    'assets/animations/register.json',
-                    controller: _registerAnimationController,
-                    height: height * 0.2,
-                    reverse: true,
-                    frameRate: FrameRate.max,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 36,
-                  ),
-                  child: const Head2(
-                    text: "Welcome to the new era of Laundry",
-                    fontSize: 30,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                  )
-                      .animate()
-                      .fadeIn(duration: const Duration(milliseconds: 1200))
-                      .moveY(duration: const Duration(milliseconds: 565))
-                      .shakeX(
-                          duration: const Duration(milliseconds: 479),
-                          delay: const Duration(milliseconds: 250))
-                      .shimmer(
-                        delay: const Duration(milliseconds: 370),
-                      ),
-                ),
-                SizedBox(height: height * 0.035),
-
-                // username textfield
-                AuthInput(
-                  controller: _emailController,
-                  hintText: 'Email or Username',
-                  obscureText: false,
-                  inputType: TextInputType.emailAddress,
-                  labelText: 'Email or Username',
-                  validator: validateEmail,
-                ).animate().shimmer(
-                      duration: const Duration(milliseconds: 875),
-                    ),
-
-                SizedBox(height: height * 0.015),
-                // Phone Number textfield
-                AuthInput(
-                  controller: _phoneNumber,
-                  hintText: 'Phone Number',
-                  obscureText: false,
-                  inputType: TextInputType.phone,
-                  labelText: 'Phone Number',
-                ).animate().shimmer(
-                      duration: const Duration(milliseconds: 875),
-                    ),
-
-                SizedBox(height: height * 0.015),
-                // password textfield
-                AuthInput(
-                  controller: _passwordController,
-                  hintText: 'Password',
-                  obscureText: true,
-                  inputType: TextInputType.text,
-                  labelText: 'Password',
-                  validator: validatePassword,
-                ).animate().shimmer(
-                      duration: const Duration(milliseconds: 875),
-                    ),
-
-                SizedBox(height: height * 0.03),
-
-                // sign in button
-                // if (isAuthenticating) onClickLogin,
-                // if (isAuthenticating)
-                LongButton(
-                  onTap: registerUser,
-                  text: 'Create an account',
-                ),
-                SizedBox(height: height * 0.015),
-                // or continue with
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.07, vertical: height * 0.015),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          thickness: 3,
-                          color: Colors.grey[400],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: AutoSizeText(
-                          'Or continue with',
-                          style: TextStyle(
-                            color: Colors.grey[300],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          thickness: 3,
-                          color: Colors.grey[400],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: height * 0.015),
-                // google + apple sign in buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // google button
-                    AuthIconButton(
-                      imagePath: 'assets/icons/google.png',
-                      onTap: () {},
-                    ).animate().shimmer(
-                          delay: const Duration(milliseconds: 1200),
-                          duration: const Duration(milliseconds: 875),
-                        ),
-
-                    SizedBox(width: width * 0.04),
-
-                    // apple button
-                    AuthIconButton(
-                      imagePath: 'assets/icons/apple.png',
-                      onTap: () {},
-                    ).animate().shimmer(
-                          delay: const Duration(milliseconds: 1200),
-                          duration: const Duration(milliseconds: 875),
-                        ),
-                  ],
-                ),
-
-                SizedBox(height: height * 0.035),
-              ],
+        Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
             ),
-          ),
-        ),
-      ),
+            body: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundImage:
+                        const AssetImage('assets/images/profile_avatar.png'),
+                    radius: _width * 0.15,
+                  ),
+                  Gap(_height * 0.09),
+                  Input(
+                    prefixIcon: const Icon(Icons.person_add_alt_rounded),
+                    labelText: "Full name",
+                    keyboardType: TextInputType.text,
+                    controller: _nameController,
+                  ),
+                  Gap(_height * 0.03),
+                  Input(
+                    prefixIcon: const Icon(Icons.alternate_email_rounded),
+                    labelText: "Email Address",
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _emailController,
+                  ),
+                  Gap(_height * 0.03),
+                  LongButton(onTap: () {}, text: "Register with your details")
+                ],
+              ),
+            )),
+      ],
     );
   }
 }
