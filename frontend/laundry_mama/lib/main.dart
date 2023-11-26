@@ -10,7 +10,7 @@ import 'package:laundry_mama/pages/quantity_page.dart';
 import 'package:laundry_mama/pages/register_user_page.dart';
 import 'package:laundry_mama/pages/time_slot_page.dart';
 import 'package:laundry_mama/pages/types_of_service.dart';
-import 'package:laundry_mama/pages/otp_page.dart';
+
 import 'package:laundry_mama/providers/auth_provider.dart';
 
 import 'package:provider/provider.dart';
@@ -50,13 +50,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HOMEPAGE: (context) => const HomePage(),
         REGISTER_USER: (context) => const RegisterUser(),
-        LOGIN_PAGE: (context) => LoginPage(
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, REGISTER_USER),
-            ),
-        OTP_PAGE: (context) => OtpPage(
-              verificationId: '',
-            ),
+        LOGIN_PAGE: (context) => LoginPage(),
         ADDRESS_PAGE: (context) => const AdressPage(),
         NEW_ORDER: (context) => const TypesOfService(),
         TIME_SLOT_PAGE: (context) => const TimeSlotPage(),

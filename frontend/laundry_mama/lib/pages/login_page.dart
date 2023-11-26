@@ -14,8 +14,10 @@ import '../widgets/auth_icons.dart';
 import '../widgets/long_button.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.onTap});
-  final Function()? onTap;
+  const LoginPage({
+    super.key,
+  });
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -37,7 +39,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       displayNameNoCountryCode: "BD",
       e164Key: "");
 
-  bool isAuthenticating = false;
   void sendPhoneNo() {
     // +8801761264426
     final ap = Provider.of<AuthProvider>(context, listen: false);
@@ -202,33 +203,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                         ),
                   ],
                 ),
-
-                // SizedBox(height: height * 0.035),
-
-                // not a member? register now
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     const AutoSizeText(
-                //       'Not a member yet???',
-                //       style: TextStyle(
-                //         fontWeight: FontWeight.bold,
-                //         color: Colors.white,
-                //       ),
-                //     ),
-                //     SizedBox(width: width * 0.009),
-                //     InkWell(
-                //       onTap: widget.onTap,
-                //       child: AutoSizeText(
-                //         'Let\'s register',
-                //         style: TextStyle(
-                //           color: Colors.grey[400],
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),
