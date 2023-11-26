@@ -11,6 +11,7 @@ import 'package:laundry_mama/pages/register_user_page.dart';
 import 'package:laundry_mama/pages/time_slot_page.dart';
 import 'package:laundry_mama/pages/types_of_service.dart';
 import 'package:laundry_mama/pages/otp_page.dart';
+import 'package:laundry_mama/providers/auth_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -22,8 +23,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CartProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+      ],
       child: const MyApp(),
     ),
   );

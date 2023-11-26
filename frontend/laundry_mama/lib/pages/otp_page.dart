@@ -73,7 +73,6 @@ class _OtpPageState extends State<OtpPage> {
                   contentPadding: const EdgeInsets.all(20),
                   isDense: true,
                   onCompleted: (value) {
-                    print("completed" + value);
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     Navigator.pushReplacementNamed(context, HOMEPAGE);
                   },
