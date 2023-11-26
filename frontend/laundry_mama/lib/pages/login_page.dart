@@ -1,11 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
-import 'package:laundry_mama/global/routes.dart';
+
+import 'package:laundry_mama/providers/auth_provider.dart';
 import 'package:laundry_mama/widgets/auth_page_input.dart';
 import 'package:laundry_mama/widgets/head2.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/auth_icons.dart';
 import '../widgets/long_button.dart';
@@ -22,11 +25,26 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   // text editing controllers
   final _phoneController = TextEditingController();
+  Country _selectedCountry = Country(
+      phoneCode: "880",
+      countryCode: "BD",
+      e164Sc: 0,
+      geographic: true,
+      level: 1,
+      name: "Bangladesh",
+      example: "Bangladesh",
+      displayName: "Bangladesh",
+      displayNameNoCountryCode: "BD",
+      e164Key: "");
 
   bool isAuthenticating = false;
+  void sendPhoneNo() {
+    // +8801761264426
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    String phoneNo = _phoneController.text.trim();
+    ap.signInWithPhoneNo(context, "+${_selectedCountry.phoneCode}$phoneNo");
+  }
 
-  /// The `initState` function initializes an animation controller with a duration of 2000 milliseconds
-  /// and starts the animation.
   @override
   void initState() {
     super.initState();
@@ -100,14 +118,31 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                   obscureText: false,
                   inputType: TextInputType.phone,
                   labelText: 'Phone Number',
+                  prefixText: AutoSizeText(
+                    '${_selectedCountry.flagEmoji} +${_selectedCountry.phoneCode}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onTapPrefixIcon: () {
+                    showCountryPicker(
+                      context: context,
+                      countryListTheme: CountryListThemeData(
+                          bottomSheetHeight:
+                              MediaQuery.of(context).size.height * 0.55),
+                      onSelect: (value) {
+                        setState(() {
+                          _selectedCountry = value;
+                        });
+                      },
+                    );
+                  },
                 ),
 
                 SizedBox(height: height * 0.085),
                 LongButton(
-                  onTap: () {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                    Navigator.pushReplacementNamed(context, OTP_PAGE);
-                  },
+                  onTap: () => sendPhoneNo(),
                   text: "Let's wash clothes",
                 ),
                 SizedBox(height: height * 0.02),

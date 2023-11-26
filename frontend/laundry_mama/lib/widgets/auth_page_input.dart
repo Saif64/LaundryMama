@@ -1,5 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 class AuthInput extends StatefulWidget {
@@ -9,6 +7,8 @@ class AuthInput extends StatefulWidget {
   final TextInputType inputType;
   final String labelText;
   final String? Function(String?)? validator;
+  final void Function()? onTapPrefixIcon;
+  final Widget? prefixText;
 
   const AuthInput({
     super.key,
@@ -18,6 +18,8 @@ class AuthInput extends StatefulWidget {
     required this.inputType,
     required this.labelText,
     this.validator,
+    this.onTapPrefixIcon,
+    this.prefixText,
   });
 
   @override
@@ -25,18 +27,6 @@ class AuthInput extends StatefulWidget {
 }
 
 class _AuthInputState extends State<AuthInput> {
-  Country _selectedCountry = Country(
-      phoneCode: "880",
-      countryCode: "BD",
-      e164Sc: 0,
-      geographic: true,
-      level: 1,
-      name: "Bangladesh",
-      example: "Bangladesh",
-      displayName: "Bangladesh",
-      displayNameNoCountryCode: "BD",
-      e164Key: "");
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,26 +41,8 @@ class _AuthInputState extends State<AuthInput> {
           prefixIcon: Container(
             padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.016),
             child: InkWell(
-              onTap: () {
-                showCountryPicker(
-                  context: context,
-                  countryListTheme: CountryListThemeData(
-                      bottomSheetHeight:
-                          MediaQuery.of(context).size.height * 0.55),
-                  onSelect: (value) {
-                    setState(() {
-                      _selectedCountry = value;
-                    });
-                  },
-                );
-              },
-              child: AutoSizeText(
-                '${_selectedCountry.flagEmoji} +${_selectedCountry.phoneCode}',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              onTap: widget.onTapPrefixIcon,
+              child: widget.prefixText,
             ),
           ),
           labelText: widget.labelText,

@@ -8,7 +8,8 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({super.key});
+  final String verificationId;
+  const OtpPage({super.key, required this.verificationId});
 
   @override
   State<OtpPage> createState() => _OtpPageState();

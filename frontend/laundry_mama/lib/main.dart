@@ -38,11 +38,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: ThemeData.light(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      initialRoute: HOMEPAGE,
+      initialRoute: ap.isLoogedIn // when true get data from sharedPreference
+          ? HOMEPAGE
+          : LOGIN_PAGE,
       routes: {
         HOMEPAGE: (context) => const HomePage(),
         REGISTER_USER: (context) => const RegisterUser(),
@@ -50,7 +54,9 @@ class MyApp extends StatelessWidget {
               onTap: () =>
                   Navigator.pushReplacementNamed(context, REGISTER_USER),
             ),
-        OTP_PAGE: (context) => const OtpPage(),
+        OTP_PAGE: (context) => OtpPage(
+              verificationId: '',
+            ),
         ADDRESS_PAGE: (context) => const AdressPage(),
         NEW_ORDER: (context) => const TypesOfService(),
         TIME_SLOT_PAGE: (context) => const TimeSlotPage(),

@@ -12,7 +12,20 @@
           "package_name": "com.example.laundry_mama"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "270976940682-oagfn15qam461ln8qjhm1jnqv052prfu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.laundry_mama",
+            "certificate_hash": "ce13909d0ba00658739bbf7ec8a054760fcbc380"
+          }
+        },
+        {
+          "client_id": "270976940682-7tqmvcastfalf76lj1062qnu1vgam59o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAd6RExDgY5TVs5rOFJLix3bgYAJ7Fch0o"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270976940682-7tqmvcastfalf76lj1062qnu1vgam59o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "270976940682-46tuaicsf7kmnd7tqv0cqet9tbbqi6i5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "personal.laundryMama"
+              }
+            }
+          ]
         }
       }
     }
