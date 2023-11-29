@@ -53,12 +53,9 @@ dependencies:
   modal_bottom_sheet: ^2.1.2
   flutter_map: ^6.0.1
   local_auth: ^2.1.7
-  firebase_core: ^2.23.0
-  firebase_auth: ^4.14.1
-  country_picker: ^2.0.22
-  cloud_firestore: ^4.13.2
-  firebase_storage: ^11.5.2
   shared_preferences: ^2.2.2
+  country_picker: ^2.0.22
+  pinput: ^3.0.1
 
 dev_dependencies:
   flutter_test:

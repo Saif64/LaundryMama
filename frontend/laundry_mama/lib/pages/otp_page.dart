@@ -1,15 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/head5.dart';
 import 'package:lottie/lottie.dart';
-import 'package:otp_text_field/otp_text_field.dart';
-import 'package:otp_text_field/style.dart';
+import 'package:pinput/pinput.dart';
+
+import '../global/routes.dart';
 
 class OtpPage extends StatefulWidget {
-  final String verificationId;
-  const OtpPage({super.key, required this.verificationId});
+  const OtpPage({super.key});
 
   @override
   State<OtpPage> createState() => _OtpPageState();
@@ -25,6 +24,7 @@ class _OtpPageState extends State<OtpPage> {
       extendBodyBehindAppBar: true,
       body: Container(
         height: height,
+        width: width,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xff688782), Color(0xff26e8e5)],
@@ -57,30 +57,37 @@ class _OtpPageState extends State<OtpPage> {
               SizedBox(
                 height: height * 0.03,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-                child: OTPTextField(
-                  keyboardType: TextInputType.number,
-                  length: 6,
-                  width: MediaQuery.of(context).size.width,
-                  fieldStyle: FieldStyle.box,
-                  textFieldAlignment: MainAxisAlignment.spaceAround,
-                  otpFieldStyle: OtpFieldStyle(
-                    focusBorderColor: Colors.white,
-                    enabledBorderColor: Colors.white,
-                  ),
-                  outlineBorderRadius: 10,
-                  fieldWidth: width * 0.12,
-                  contentPadding: const EdgeInsets.all(20),
-                  isDense: true,
-                  onCompleted: (value) {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                    Navigator.pushReplacementNamed(context, HOMEPAGE);
-                  },
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+              //   child: OTPTextField(
+              //     keyboardType: TextInputType.number,
+              //     length: 6,
+              //     width: MediaQuery.of(context).size.width,
+              //     fieldStyle: FieldStyle.box,
+              //     textFieldAlignment: MainAxisAlignment.spaceAround,
+              //     otpFieldStyle: OtpFieldStyle(
+              //       focusBorderColor: Colors.white,
+              //       enabledBorderColor: Colors.white,
+              //     ),
+              //     outlineBorderRadius: 10,
+              //     fieldWidth: width * 0.12,
+              //     contentPadding: const EdgeInsets.all(20),
+              //     isDense: true,
+              //     onCompleted: (value) {
+              //       Navigator.of(context).popUntil((route) => route.isFirst);
+              //       Navigator.pushReplacementNamed(context, HOMEPAGE);
+              //     },
+              //     style: const TextStyle(
+              //       fontSize: 17,
+              //     ),
+              //   ),
+              // ),
+              Pinput(
+                length: 6,
+                onCompleted: (value) {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushReplacementNamed(context, HOMEPAGE);
+                },
               ),
               SizedBox(height: height * 0.05),
               const Head5(text: "Haven't recieved code yet?"),

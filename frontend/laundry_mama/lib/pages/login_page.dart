@@ -3,12 +3,11 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:laundry_mama/global/routes.dart';
 
-import 'package:laundry_mama/providers/auth_provider.dart';
 import 'package:laundry_mama/widgets/auth_page_input.dart';
 import 'package:laundry_mama/widgets/head2.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/auth_icons.dart';
 import '../widgets/long_button.dart';
@@ -38,13 +37,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       displayName: "Bangladesh",
       displayNameNoCountryCode: "BD",
       e164Key: "");
-
-  void sendPhoneNo() {
-    // +8801761264426
-    final ap = Provider.of<AuthProvider>(context, listen: false);
-    String phoneNo = _phoneController.text.trim();
-    ap.signInWithPhoneNo(context, "+${_selectedCountry.phoneCode}$phoneNo");
-  }
 
   @override
   void initState() {
@@ -143,7 +135,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                 SizedBox(height: height * 0.085),
                 LongButton(
-                  onTap: () => sendPhoneNo(),
+                  onTap: () =>
+                      Navigator.pushReplacementNamed(context, OTP_PAGE),
                   text: "Let's wash clothes",
                 ),
                 SizedBox(height: height * 0.02),
