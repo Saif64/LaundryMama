@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
@@ -26,7 +27,9 @@ class _ProfilePageState extends State<ProfilePage> {
         toolbarHeight: height * 0.05,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(REGISTER_USER);
+            },
             icon: Icon(
               Icons.edit_note_rounded,
               size: width * 0.07,
@@ -49,7 +52,10 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Gap(height * 0.05),
-              const Head4(text: 'Account Info'),
+              const Head4(text: 'Account Info')
+                  .animate()
+                  .fadeIn(duration: const Duration(milliseconds: 325))
+                  .moveX(delay: const Duration(milliseconds: 30)),
               Gap(height * 0.02),
               Hero(
                 tag: 'profile-pic',
@@ -63,7 +69,10 @@ class _ProfilePageState extends State<ProfilePage> {
               Gap(height * 0.06),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: width * 0.03),
-                child: const Head5(text: 'Basic Info'),
+                child: const Head5(text: 'Basic Info')
+                    .animate()
+                    .fadeIn(duration: const Duration(milliseconds: 325))
+                    .moveX(delay: const Duration(milliseconds: 30)),
               ),
               Gap(height * 0.01),
               SizedBox(
@@ -80,7 +89,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         text: accountInfo[index]["info"].toString(),
                         fontWeight: FontWeight.w400,
                       ),
-                    );
+                    )
+                        .animate()
+                        .fadeIn(duration: const Duration(milliseconds: 325))
+                        .moveX(delay: const Duration(milliseconds: 30));
                   },
                 ),
               ),

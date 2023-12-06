@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:laundry_mama/widgets/head4.dart';
 import 'package:laundry_mama/widgets/head5.dart';
@@ -51,12 +52,14 @@ class _InProgressState extends State<InProgress> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Lottie.asset(
-                  'assets/animations/in_progress.json',
-                  reverse: true,
-                  fit: BoxFit.contain,
-                  width: width * 0.8,
-                  frameRate: FrameRate.max,
+                RepaintBoundary(
+                  child: Lottie.asset(
+                    'assets/animations/in_progress.json',
+                    reverse: true,
+                    fit: BoxFit.contain,
+                    width: width * 0.8,
+                    frameRate: FrameRate.max,
+                  ),
                 ),
                 Gap(height * 0.03),
                 const Head4(text: 'Your Service is being ready'),
@@ -132,7 +135,10 @@ class _InProgressState extends State<InProgress> {
                 Gap(height * 0.03),
                 const Head4(
                   text: 'Discounted Services',
-                ),
+                )
+                    .animate()
+                    .fadeIn(duration: const Duration(milliseconds: 325))
+                    .moveY(delay: const Duration(milliseconds: 30)),
                 SizedBox(
                   height: height * 0.2,
                   child: ListView.builder(
@@ -145,7 +151,10 @@ class _InProgressState extends State<InProgress> {
                         subHeader: 'USE KAPOR30 TO \nGET 30 TAKA DISCOUNT',
                         backgroundColor: const Color.fromARGB(255, 0, 129, 189),
                         offerImage: offerImage[index],
-                      );
+                      )
+                          .animate()
+                          .fadeIn(duration: const Duration(milliseconds: 325))
+                          .moveY(delay: const Duration(milliseconds: 30));
                     },
                   ),
                 ),

@@ -3,6 +3,7 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:laundry_mama/global/routes.dart';
@@ -48,10 +49,14 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Head4(text: 'Choose when You\'d like to call the rider'),
+                Gap(height * 0.05),
+                const Head4(text: 'Choose when You\'d like to call the rider')
+                    .animate()
+                    .fadeIn(duration: const Duration(milliseconds: 325))
+                    .moveY(delay: const Duration(milliseconds: 30)),
                 Gap(height * 0.05),
                 SizedBox(
-                  height: height * 0.1,
+                  height: height * 0.12,
                   child: DatePicker(
                     DateTime.now(),
                     initialSelectedDate: DateTime.now(),
@@ -64,8 +69,11 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
                       });
                     },
                   ),
-                ),
-                Gap(height * 0.03),
+                )
+                    .animate()
+                    .fadeIn(duration: const Duration(milliseconds: 325))
+                    .moveY(delay: const Duration(milliseconds: 30)),
+                Gap(height * 0.05),
                 showPicker(
                   context: context,
                   borderRadius: 50,
