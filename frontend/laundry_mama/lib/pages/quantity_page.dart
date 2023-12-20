@@ -178,6 +178,7 @@ class _QuantityPageState extends State<QuantityPage> {
                 child: RoundButton(
                   onTap: () {
                     showModalBottomSheet(
+                      enableDrag: true,
                       context: context,
                       isScrollControlled: true,
                       builder: (BuildContext context) {

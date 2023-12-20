@@ -19,7 +19,7 @@ class LocationTiles extends StatelessWidget {
             size: MediaQuery.of(context).size.width * 0.07,
           ),
           Gap(MediaQuery.of(context).size.width * 0.04),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AutoSizeText(

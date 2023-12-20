@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: homepageAppbar(context, width),
       body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.035),
           child: Column(

@@ -104,7 +104,7 @@ class _InProgressState extends State<InProgress> {
                       ],
                     ),
                     Gap(height * 0.03),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Head5(
