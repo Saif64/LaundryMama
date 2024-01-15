@@ -25,14 +25,6 @@ class _OtpPageState extends State<OtpPage> {
       body: Container(
         height: height,
         width: width,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xff688782), Color(0xff26e8e5)],
-            stops: [0.25, 0.75],
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-          ),
-        ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -57,31 +49,6 @@ class _OtpPageState extends State<OtpPage> {
               SizedBox(
                 height: height * 0.03,
               ),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-              //   child: OTPTextField(
-              //     keyboardType: TextInputType.number,
-              //     length: 6,
-              //     width: MediaQuery.of(context).size.width,
-              //     fieldStyle: FieldStyle.box,
-              //     textFieldAlignment: MainAxisAlignment.spaceAround,
-              //     otpFieldStyle: OtpFieldStyle(
-              //       focusBorderColor: Colors.white,
-              //       enabledBorderColor: Colors.white,
-              //     ),
-              //     outlineBorderRadius: 10,
-              //     fieldWidth: width * 0.12,
-              //     contentPadding: const EdgeInsets.all(20),
-              //     isDense: true,
-              //     onCompleted: (value) {
-              //       Navigator.of(context).popUntil((route) => route.isFirst);
-              //       Navigator.pushReplacementNamed(context, HOMEPAGE);
-              //     },
-              //     style: const TextStyle(
-              //       fontSize: 17,
-              //     ),
-              //   ),
-              // ),
               Pinput(
                 length: 6,
                 onCompleted: (value) {

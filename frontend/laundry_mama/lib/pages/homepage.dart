@@ -105,12 +105,25 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const Head4(
-                text: 'Offers & more',
-              )
-                  .animate()
-                  .fadeIn(duration: const Duration(milliseconds: 325))
-                  .moveX(delay: const Duration(milliseconds: 30)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Head4(
+                    text: 'Offers & more',
+                  )
+                      .animate()
+                      .fadeIn(duration: const Duration(milliseconds: 325))
+                      .moveX(delay: const Duration(milliseconds: 30)),
+                  InkWell(
+                    onTap: () {},
+                    child: const Head6(
+                      text: 'View All',
+                      fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
+                    ),
+                  )
+                ],
+              ),
               SizedBox(
                 height: height * 0.2,
                 child: ListView.builder(
@@ -139,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                       .animate()
                       .fadeIn(duration: const Duration(milliseconds: 325))
                       .moveX(delay: const Duration(milliseconds: 150)),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {},
                     child: const Head6(
                       text: 'View All',
