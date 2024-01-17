@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/head4.dart';
@@ -28,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(REGISTER_USER);
+              context.push(REGISTER_USER);
             },
             icon: Icon(
               Icons.edit_note_rounded,
@@ -36,8 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           IconButton(
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, LOGIN_PAGE),
+            onPressed: () => context.go(LOGIN_PAGE),
             icon: Icon(
               Icons.logout_rounded,
               size: width * 0.06,

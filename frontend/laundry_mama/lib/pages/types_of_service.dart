@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/head4.dart';
 import 'package:laundry_mama/widgets/head5.dart';
@@ -100,7 +101,7 @@ class _TypesOfServiceState extends State<TypesOfService> {
               Align(
                 alignment: Alignment.center,
                 child: RoundButton(
-                  onTap: () => Navigator.pushNamed(context, QUANTITY_PAGE),
+                  onTap: () => context.push(QUANTITY_PAGE),
                   icon: const Icon(
                     Icons.arrow_right_alt_rounded,
                     size: 35,

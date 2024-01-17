@@ -5,7 +5,7 @@ import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/head4.dart';
 
@@ -25,10 +25,11 @@ class _TimeSlotPageState extends State<TimeSlotPage> {
     setState(() {
       _time = newTime;
     });
-    Navigator.pushReplacementNamed(context, CART_PAGE, arguments: {
-      'time': _time.format(context),
-      'date': DateFormat('EEE d MMM, y').format(_selectedDate)
-    });
+    // Navigator.pushReplacementNamed(context, CART_PAGE, arguments: {
+    //   'time': _time.format(context),
+    //   'date': DateFormat('EEE d MMM, y').format(_selectedDate)
+    // });
+    context.go(CART_PAGE);
   }
 
   @override

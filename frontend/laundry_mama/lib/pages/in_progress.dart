@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/widgets/head4.dart';
 import 'package:laundry_mama/widgets/head5.dart';
 import 'package:laundry_mama/widgets/offer_progress_card.dart';
@@ -37,7 +38,8 @@ class _InProgressState extends State<InProgress> {
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).popUntil((route) => route.isFirst);
-            Navigator.pushReplacementNamed(context, HOMEPAGE);
+            // Navigator.pushReplacementNamed(context, HOMEPAGE);
+            context.go(HOMEPAGE);
           },
           icon: Icon(
             Icons.home_outlined,

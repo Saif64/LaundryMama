@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/widgets/head5.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
@@ -53,7 +54,8 @@ class _OtpPageState extends State<OtpPage> {
                 length: 6,
                 onCompleted: (value) {
                   Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.pushReplacementNamed(context, HOMEPAGE);
+                  // Navigator.pushReplacementNamed(context, HOMEPAGE);
+                  context.go(HOMEPAGE);
                 },
               ),
               SizedBox(height: height * 0.05),

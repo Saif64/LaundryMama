@@ -3,6 +3,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/global/routes.dart';
 
 import 'package:laundry_mama/widgets/auth_page_input.dart';
@@ -135,8 +136,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                 SizedBox(height: height * 0.085),
                 LongButton(
-                  onTap: () =>
-                      Navigator.pushReplacementNamed(context, OTP_PAGE),
+                  onTap: () => context.go(OTP_PAGE),
                   text: "Let's wash clothes",
                 ),
                 SizedBox(height: height * 0.02),

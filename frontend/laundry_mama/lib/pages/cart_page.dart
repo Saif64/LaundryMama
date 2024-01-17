@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laundry_mama/global/routes.dart';
 
@@ -181,8 +182,7 @@ class _CartPageState extends State<CartPage> {
                             .fadeIn(duration: const Duration(milliseconds: 325))
                             .moveY(delay: const Duration(milliseconds: 30)),
                         ElevatedButton(
-                          onPressed: () => Navigator.pushReplacementNamed(
-                              context, IN_PROGRESS),
+                          onPressed: () => context.go(IN_PROGRESS),
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromARGB(255, 60, 4, 157),

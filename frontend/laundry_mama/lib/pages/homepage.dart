@@ -3,13 +3,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/dummy_data/dummy_data.dart';
 import 'package:laundry_mama/global/routes.dart';
 
 import 'package:laundry_mama/widgets/box_hor.dart';
 
 import 'package:laundry_mama/widgets/head6.dart';
-import 'package:laundry_mama/widgets/offer_progress_card.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/cart_model.dart';
@@ -24,10 +24,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void toSignupPage() {
-    Navigator.pushNamed(context, REGISTER_USER);
-  }
-
   void toAdressPage() {
     Navigator.pushNamed(context, ADDRESS_PAGE);
   }
@@ -76,8 +72,7 @@ class _HomePageState extends State<HomePage> {
                             'Start your \nlaundry by adding basket',
                         isCurrent: true,
                         containerWidth: width * 0.36,
-                        onPressed: () =>
-                            Navigator.pushNamed(context, NEW_ORDER),
+                        onPressed: () => context.push(NEW_ORDER),
                       )
                           .animate()
                           .fadeIn(duration: const Duration(milliseconds: 325))
@@ -105,44 +100,44 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Head4(
-                    text: 'Offers & more',
-                  )
-                      .animate()
-                      .fadeIn(duration: const Duration(milliseconds: 325))
-                      .moveX(delay: const Duration(milliseconds: 30)),
-                  InkWell(
-                    onTap: () {},
-                    child: const Head6(
-                      text: 'View All',
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: height * 0.2,
-                child: ListView.builder(
-                  itemCount: offerNMore.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return OfferProgressCard(
-                      containerWidth: width * 0.78,
-                      headline: offerNMore[index]["headline"].toString(),
-                      subHeader: offerNMore[index]['subHeader'].toString(),
-                      backgroundColor: const Color.fromARGB(255, 0, 129, 189),
-                      offerImage: offerImage[index],
-                    )
-                        .animate()
-                        .fadeIn(duration: const Duration(milliseconds: 325))
-                        .moveY(delay: const Duration(milliseconds: 30));
-                  },
-                ),
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     const Head4(
+              //       text: 'Offers & more',
+              //     )
+              //         .animate()
+              //         .fadeIn(duration: const Duration(milliseconds: 325))
+              //         .moveX(delay: const Duration(milliseconds: 30)),
+              //     InkWell(
+              //       onTap: () {},
+              //       child: const Head6(
+              //         text: 'View All',
+              //         fontWeight: FontWeight.w400,
+              //         decoration: TextDecoration.underline,
+              //       ),
+              //     )
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: height * 0.2,
+              //   child: ListView.builder(
+              //     itemCount: offerNMore.length,
+              //     scrollDirection: Axis.horizontal,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return OfferProgressCard(
+              //         containerWidth: width * 0.78,
+              //         headline: offerNMore[index]["headline"].toString(),
+              //         subHeader: offerNMore[index]['subHeader'].toString(),
+              //         backgroundColor: const Color.fromARGB(255, 0, 129, 189),
+              //         offerImage: offerImage[index],
+              //       )
+              //           .animate()
+              //           .fadeIn(duration: const Duration(milliseconds: 325))
+              //           .moveY(delay: const Duration(milliseconds: 30));
+              //     },
+              //   ),
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -200,7 +195,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       centerTitle: false,
       title: TextButton(
-        onPressed: toAdressPage,
+        onPressed: () => context.push(ADDRESS_PAGE),
         child: Row(
           children: [
             Icon(
@@ -225,7 +220,7 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: [
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, CART_PAGE),
+          onTap: () => context.push(CART_PAGE),
           child: Padding(
             padding: EdgeInsets.all(width * 0.015),
             child: Stack(children: [
@@ -266,7 +261,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, PROFILE_PAGE),
+          onTap: () => context.push(PROFILE_PAGE),
           child: Padding(
             padding: EdgeInsets.all(width * 0.015),
             child: Hero(
