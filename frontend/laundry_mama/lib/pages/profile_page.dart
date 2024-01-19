@@ -90,6 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         elevation: 2,
                         isDismissible: true,
                         isScrollControlled: true,
+                        enableDrag: true,
                         context: context,
                         builder: (context) {
                           return SingleChildScrollView(
