@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:laundry_mama/global/routes.dart';
 import 'package:laundry_mama/widgets/head2.dart';
 import 'package:laundry_mama/widgets/head4.dart';
-import 'package:laundry_mama/widgets/medium_button.dart';
+import 'package:laundry_mama/widgets/long_button.dart';
+
 import 'package:laundry_mama/widgets/profile_tiles.dart';
 
 import '../widgets/input.dart';
@@ -82,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 children: [
                   ProfileTiles(
-                    title: "Profile",
+                    title: "Update information",
                     onTap: () {
                       // context.push(REGISTER_USER);
                       showModalBottomSheet(
@@ -119,7 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   controller: _emailController,
                                 ),
                                 Gap(height * 0.03),
-                                MediumButton(
+                                LongButton(
                                     onTap: () {}, text: "Update Profile"),
                                 Gap(height * 0.05)
                               ],
